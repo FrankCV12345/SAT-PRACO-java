@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #575757;
+}
+#app{
+    min-height:100%;
+    background-color: #F8F8F8;
+}
+.container{
+    height:100%;
+    width: 800px;
+    margin: 0 auto;
+}
+.cont-frm-regist_entrada{
+    padding-top: 15%;
+    width: 500px;
+    height: 300px;
+    margin-left: 150px;
+    }
+#hora-entrada{
+    color: #575757;
+    text-shadow: 6px 2px 2px rgba(0, 0, 0, 0.25);
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 64px;
+    text-align: center
+}
+#title-frm-entrada{
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 36px;
+    text-align: center;
+    color: #000000;
+}
+.frm-entrada{
+    background-color:#FFFFFF;        
+    height: 300px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+ .cja-text{
+    background: #EAEAEA;
+    font-size: 36px;
+    border: none;
+    text-align: center;
+    margin-left:28px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    min-width: 280px;
+    height: 87px;
+}
+.btn-a{
+    width: 168px;
+    height: 42px;
+    background: #03DAC6;
+    border: none;
+    font-size: 24px;
+    margin-top: 30px;
+    margin-left:160px;
+}
