@@ -21,10 +21,26 @@ public class OperacionesUser implements IOperacionesUser  {
         Connection con = objCon.EstablecerConexion();
         String rpta = "";
         try{
-            PreparedStatement pst = con.prepareStatement("{ call dbo.Proc_reg_entrada (?)}");
+            PreparedStatement pst = con.prepareStatement("{ call Proc_busca_usu (?)}");
             pst.setInt(1, id_user);
-            pst.execute();
-            rpta = pst.getUpdateCount() > 0 ? "ENTRADA REGISTRADA": "USUARIO NO ENCONTRADO";
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                PreparedStatement pst2 = con.prepareStatement("{ call Proc_verRI (?)}");
+                 pst2.setInt(1, id_user);
+                  ResultSet rs2 = pst2.executeQuery();
+                if(rs2.next()){
+                    rpta="USETED YA SE REGISTRO SU INGRESO";
+                }else{
+                    PreparedStatement pst3 = con.prepareStatement("{ call Proc_reg_entrada (?)}");
+                    pst3.setInt(1, id_user);
+                      pst3.execute();
+                     rpta=" registrado correctamente";
+                }
+            }else{
+            rpta="USUARIO NO EXISTE";
+            }
+               
+           
             objCon.desconectar();
         }catch( SQLException e){
             e.printStackTrace();

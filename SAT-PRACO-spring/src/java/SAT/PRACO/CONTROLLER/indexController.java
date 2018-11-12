@@ -22,18 +22,19 @@ public class indexController {
     public String index(){
     return "Entrada";
     }
-    @RequestMapping(value="/registraIngreso",method = RequestMethod.GET)
-    public @ResponseBody String RegistraEntrada(){
-        return "ADASDSD"; 
-    }
-    /*public @ResponseBody String RegistraEntrada(@RequestBody String id_user){
-        OperacionesUser opeUser = new OperacionesUser();
-        int id = 0;
-        String id_proce = id_user.replace(" ","");
-        
-        String rpta =id_proce; //opeUser.RegistraIngreso(id);
+    
+   /* public @ResponseBody String RegistraEntrada(){
         return "ADASDSD"; 
     }*/
+   @RequestMapping(value="/registraIngreso",method = RequestMethod.POST)
+   public @ResponseBody String RegistraEntrada(@RequestBody String id_user){
+        OperacionesUser opeUser = new OperacionesUser();
+        String  n = id_user.replaceAll("id=", "");
+        int id = Integer.parseInt(n);
+        //int id = Integer.parseInt(id_user);
+        String rpta = opeUser.RegistraIngreso(id);
+        return rpta; 
+    }
     
     
 }

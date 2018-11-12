@@ -3,8 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-spring/web/WEB-INF/jsp/Entrada.jsp</file>
-            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-spring/src/java/SAT/PRACO/CONTROLLER/indexController.java</file>
+            <file>file:/C:/Users/SARA/Desktop/sr/SAT-PRACO-java/SAT-PRACO-spring/web/WEB-INF/jsp/Entrada.jsp</file>
+            <file>file:/C:/Users/SARA/Desktop/sr/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/DAO/OperacionesUser.java</file>
+            <file>file:/C:/Users/SARA/Desktop/sr/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/CONTROLLER/indexController.java</file>
         </group>
     </open-files>
 </project-private>

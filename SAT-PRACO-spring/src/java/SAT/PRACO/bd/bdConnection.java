@@ -14,15 +14,11 @@ import java.sql.SQLException;
  * @author Administrador
  */
 public class bdConnection {
-    private String url ="jdbc:sqlserver:DESKTOP-1TI9C90:1433;databaseName=BDSatPraco";
-    private String login ="";
-    private String password ="";
+    private String url ="jdbc:sqlserver://DESKTOP-1TI9C90:1433;databaseName=BDSatPraco";
+    private String login ="fcv";
+    private String password ="123";
     private String driver ="com.microsoft.sqlserver.jdbc.SQLServerDriver";    
     Connection conn =null;
-
-    public bdConnection() {
-        
-    }
     public Connection EstablecerConexion(){
         try{
             Class.forName(driver);

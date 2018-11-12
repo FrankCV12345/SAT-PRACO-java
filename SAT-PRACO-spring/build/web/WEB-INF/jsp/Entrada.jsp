@@ -18,23 +18,18 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript">
             function RegistraEntrada(){
-                $.ajax({
-                   type:"GET",
-                   url:"/SAT-PRACO-spring/registraIngreso",
-                   async:false,
-                   cache:false,
-                   dataType:"json",
-                   contentType: 'json',
-                   sussces:function(result){
-                      alert(result.id_usu);
-                   },
-                   error:function(){
-                       alert("al mierda .l.");
-                   }
-                });
                 
-                    
-                
+                 var id_user = $("#id_user").val();
+                 var id = parseInt(id_user);
+                 $.post("/SAT-PRACO-spring/registraIngreso",{id},
+                        function(data){
+                           $(".alert").css("top","0");
+                           $(".msj").text(data);
+                        }); 
+            }
+            function EscondeAlert(){
+                 $(".alert").css("top","-200px");
+                 $(".id_user").val("");
             }
             
         </script>
@@ -42,14 +37,22 @@
     <body onload="MostrarHora()">
         <div id="app">
             <div class="container">
+                <div class="alert">
+                    <div class="msj">
+                    </div>
+                    <div class="btn-b" onclick="EscondeAlert()">CERRAR</div>
+                    
+                </div>
                 <div class="cont-frm-regist_entrada">
                     <div class="title-frm-regist_entrada">
                     <h1 id="hora-entrada">--:--:--</h1>
                     </div>
                     <div class="frm-entrada">
                         <h2 id="title-frm-entrada">INGRESE SU CODIGO</h2>
+                      
                         <input type="text" class="cja-text" id="id_user" placeholder="CODIGO">
                         <input type="submit"  value="REGISTRAR" onclick="RegistraEntrada()" class="btn-a">
+                    
                     </div>
                 </div>
 

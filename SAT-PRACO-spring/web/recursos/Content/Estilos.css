@@ -65,3 +65,35 @@ html,body{
     margin-top: 30px;
     margin-left:160px;
 }
+.alert{
+    -webkit-box-shadow: 2px 2px 10px 0px rgba(110,110,110,1);
+    -moz-box-shadow: 2px 2px 10px 0px rgba(110,110,110,1);
+    box-shadow: 2px 2px 10px 0px rgba(110,110,110,1);
+    background-color: white;
+    position: fixed;
+    z-index: 350;
+    top: -200px;
+    width: 300px;
+    height: 150px;
+    left: 50%;
+    margin-left: -10%;
+    transition: all 0.5s;
+    text-align: center;
+}
+.btn-b{
+    
+    width: 100px;
+    padding: 4px;
+    margin: 0 auto;
+   background: #03DAC6;
+   color: black;
+}
+.btn-b:hover{
+    cursor: pointer;
+}
+.msj{
+    padding-top:20px; 
+    width: 250px;
+    height: 90px;
+    margin: 0 auto;
+}
