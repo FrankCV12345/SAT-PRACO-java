@@ -319,6 +319,7 @@ go
 
 
 create  PROCEDURE Proc_reg_entrada
+
 @id_user  int
 AS 
 insert  into RegistroIngreso values(SYSDATETIME (), @id_user);
@@ -327,19 +328,22 @@ go
  create procedure Proc_verRI
 @id_usu int
 as
-select RegistroIngreso.HoraIngreso from RegistroIngreso where FORMAT(HoraIngreso,'dd/MM/yyyy')  = FORMAT(GETDATE(),'dd/MM/yyyy') 
+select RegistroIngreso.HoraIngreso from RegistroIngreso where FORMAT(HoraIngreso,'dd/MM/yyyy')  = FORMAT(GETDATE(),'dd/MM/yyyy')  and RegistroIngreso.IdUsuario = @id_usu
 go
 
 create procedure Proc_busca_usu
  @id_usu int
  as
- go
- select RegistroIngreso.HoraIngreso from RegistroIngreso where FORMAT(HoraIngreso,'dd/MM/yyyy')  = FORMAT(GETDATE(),'dd/MM/yyyy') 
+ select Usuario.IdUsuario from Usuario where Usuario.IdUsuario =  @id_usu
 go
 
+select * from RegistroIngreso
+go
+select * from Usuario
+go
 
-
-
+Proc_verRI 2
+go
 
 
 

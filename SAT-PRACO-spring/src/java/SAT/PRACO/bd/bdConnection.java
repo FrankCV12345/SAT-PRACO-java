@@ -14,8 +14,8 @@ import java.sql.SQLException;
  * @author Administrador
  */
 public class bdConnection {
-    private String url ="jdbc:sqlserver://DESKTOP-1TI9C90:1433;databaseName=BDSatPraco";
-    private String login ="fcv";
+    private String url ="jdbc:sqlserver://UTP065138-02:1433;databaseName=BDSatPraco";
+    private String login ="sa";
     private String password ="123";
     private String driver ="com.microsoft.sqlserver.jdbc.SQLServerDriver";    
     Connection conn =null;

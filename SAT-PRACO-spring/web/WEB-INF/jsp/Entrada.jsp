@@ -20,8 +20,8 @@
             function RegistraEntrada(){
                 
                  var id_user = $("#id_user").val();
-                 var id = parseInt(id_user);
-                 $.post("/SAT-PRACO-spring/registraIngreso",{id},
+                 //var id = parseInt(id_user);
+                 $.post("/SAT-PRACO-spring/registraIngreso",{id_user},
                         function(data){
                            $(".alert").css("top","0");
                            $(".msj").text(data);

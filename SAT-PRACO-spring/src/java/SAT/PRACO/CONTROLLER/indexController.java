@@ -29,7 +29,7 @@ public class indexController {
    @RequestMapping(value="/registraIngreso",method = RequestMethod.POST)
    public @ResponseBody String RegistraEntrada(@RequestBody String id_user){
         OperacionesUser opeUser = new OperacionesUser();
-        String  n = id_user.replaceAll("id=", "");
+        String  n = id_user.replaceAll("id_user=E", "");
         int id = Integer.parseInt(n);
         //int id = Integer.parseInt(id_user);
         String rpta = opeUser.RegistraIngreso(id);

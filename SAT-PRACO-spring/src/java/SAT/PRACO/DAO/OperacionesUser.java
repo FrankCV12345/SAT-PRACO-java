@@ -19,7 +19,7 @@ public class OperacionesUser implements IOperacionesUser  {
     public String RegistraIngreso(int id_user) {
         bdConnection objCon = new bdConnection();
         Connection con = objCon.EstablecerConexion();
-        String rpta = "";
+        String rpta ="";
         try{
             PreparedStatement pst = con.prepareStatement("{ call Proc_busca_usu (?)}");
             pst.setInt(1, id_user);
@@ -43,7 +43,8 @@ public class OperacionesUser implements IOperacionesUser  {
            
             objCon.desconectar();
         }catch( SQLException e){
-            e.printStackTrace();
+             
+            rpta = " nalgas pe chicho "+e;
         }
         return rpta;
     }
