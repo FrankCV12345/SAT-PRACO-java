@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Date;
 
 public class OperacionesUser implements IOperacionesUser  {
 
@@ -44,7 +45,41 @@ public class OperacionesUser implements IOperacionesUser  {
             objCon.desconectar();
         }catch( SQLException e){
              
-            rpta = " nalgas pe chicho "+e;
+            rpta = ""+e;
+        }
+        return rpta;
+    }
+
+    @Override
+    public String RegistroSalida(int id_user) {
+        bdConnection objCon = new bdConnection();
+        Connection con = objCon.EstablecerConexion();
+        String rpta ="";
+        try{
+            PreparedStatement pst = con.prepareStatement("{ call Proc_busca_usu (?)}");
+            pst.setInt(1, id_user);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                 PreparedStatement pst2 = con.prepareStatement("{ call proc_fechaingreso (?)}");
+                 int horas = 0;
+                 pst2.setInt(1, id_user);
+                  ResultSet rs2 = pst2.executeQuery();
+                  while(rs2.next()){
+                        horas = rs2.getInt(1);
+                  }
+                   PreparedStatement pst3 = con.prepareStatement("{ call proc_registrasalida (?,?)}");
+                    pst3.setInt(1, id_user);
+                    pst3.setInt(2, horas);
+                   pst3.execute();
+                  rpta = " se registro su salida , las horas trabajadas son "+horas;
+                  
+                }else{
+                rpta="no";
+            }
+            
+            
+        }catch(SQLException e){
+            rpta = ""+e.getMessage();
         }
         return rpta;
     }

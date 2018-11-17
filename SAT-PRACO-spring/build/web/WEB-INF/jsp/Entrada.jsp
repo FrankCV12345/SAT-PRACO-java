@@ -48,7 +48,7 @@
                     <h1 id="hora-entrada">--:--:--</h1>
                     </div>
                     <div class="frm-entrada">
-                        <h2 id="title-frm-entrada">INGRESE SU CODIGO</h2>
+                        <h2 id="title-frm-entrada">REGISTRO ENTRADA</h2>
                       
                         <input type="text" class="cja-text" id="id_user" placeholder="CODIGO">
                         <input type="submit"  value="REGISTRAR" onclick="RegistraEntrada()" class="btn-a">

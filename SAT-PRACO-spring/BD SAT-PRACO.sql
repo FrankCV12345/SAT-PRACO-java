@@ -62,7 +62,7 @@ Go
 --=============TABLA RegistroSalida========4=
 Create Table RegistroSalida
 (
-	IdRegistroS        int		 NOT NULL,
+	IdRegistroS        int	 IDENTITY(1,1)	 NOT NULL,
 	HoraSalida         datetime  NOT NULL,
 	Fecha              datetime  NOT NULL,
 	IdUsuario          int	     NOT NULL,
@@ -345,6 +345,21 @@ go
 Proc_verRI 2
 go
 
+create procedure proc_fechaingreso
+
+@id_usu int
+as
+select DATEDIFF(HOUR, RegistroIngreso.HoraIngreso,SYSDATETIME()) from RegistroIngreso  where  RegistroIngreso.IdUsuario = 1 and FORMAT(HoraIngreso,'dd/MM/yyyy')  = FORMAT(GETDATE(),'dd/MM/yyyy')
+go
+
+ proc_fechaingreso 1
+ go
+create procedure proc_registrasalida
+@id_usu int,
+@horas int
+as
+insert into RegistroSalida values(1,SYSDATETIME(),GETDATE(),1,8)
+go
 
 
 

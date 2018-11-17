@@ -11,4 +11,5 @@ import SAT.PRACO.MODEL.USER_MODEL;
  */
 public interface IOperacionesUser {
     public String RegistraIngreso(int id_user);
+    public String RegistroSalida(int id_user);
 }

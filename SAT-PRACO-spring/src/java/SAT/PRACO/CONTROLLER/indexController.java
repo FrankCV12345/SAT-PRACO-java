@@ -22,6 +22,10 @@ public class indexController {
     public String index(){
     return "Entrada";
     }
+    @RequestMapping(value="/salida",method= RequestMethod.GET)
+    public String salida(){
+    return "salida";
+    }
     
    /* public @ResponseBody String RegistraEntrada(){
         return "ADASDSD"; 
@@ -33,6 +37,15 @@ public class indexController {
         int id = Integer.parseInt(n);
         //int id = Integer.parseInt(id_user);
         String rpta = opeUser.RegistraIngreso(id);
+        return rpta; 
+    }
+      @RequestMapping(value="/registraSalida",method = RequestMethod.POST)
+   public @ResponseBody String RegistraSalida(@RequestBody String id_user){
+        OperacionesUser opeUser = new OperacionesUser();
+        String  n = id_user.replaceAll("id_user=E", "");
+        int id = Integer.parseInt(n);
+        //int id = Integer.parseInt(id_user);
+        String rpta = opeUser.RegistroSalida(id);
         return rpta; 
     }
     

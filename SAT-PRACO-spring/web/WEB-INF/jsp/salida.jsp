@@ -17,11 +17,9 @@
         <spring:url var="JqueryJs" value="/Recursos/Scripts/Jquery/jquery-1.12.4.js"></spring:url>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript">
-            function RegistraEntrada(){
-                
+            function RegistraSalida(){
                  var id_user = $("#id_user").val();
-                 //var id = parseInt(id_user);
-                 $.post("/SAT-PRACO-spring/registraIngreso",{id_user},
+                 $.post("/SAT-PRACO-spring/registraSalida",{id_user},
                         function(data){
                            $(".alert").css("top","0");
                            $(".msj").text(data);
@@ -48,10 +46,10 @@
                     <h1 id="hora-entrada">--:--:--</h1>
                     </div>
                     <div class="frm-entrada">
-                        <h2 id="title-frm-entrada">REGISTRO ENTRADA</h2>
+                        <h2 id="title-frm-entrada">REGISTRO SALIDA</h2>
                       
                         <input type="text" class="cja-text" id="id_user" placeholder="CODIGO">
-                        <input type="submit"  value="REGISTRAR" onclick="RegistraEntrada()" class="btn-a">
+                        <input type="submit"  value="REGISTRAR" onclick="RegistraSalida()" class="btn-a">
                     
                     </div>
                 </div>
