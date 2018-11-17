@@ -358,8 +358,13 @@ create procedure proc_registrasalida
 @id_usu int,
 @horas int
 as
-insert into RegistroSalida values(1,SYSDATETIME(),GETDATE(),1,8)
+insert into RegistroSalida values(SYSDATETIME(),GETDATE(),@id_usu,@horas)
 go
-
+proc_registrasalida 1,2
+go
+select  * from RegistroIngreso
+go
+select * from RegistroSalida
+go
 
 
