@@ -4,13 +4,12 @@
  * and open the template in the editor.
  */
 package SAT.PRACO.IDAO;
-import SAT.PRACO.MODEL.USER_MODEL;
+import SAT.PRACO.MODEL.CargoModel;
+import java.util.List;
 /**
  *
  * @author SARA
  */
-public interface IOperacionesUser {
-    public String RegistraIngreso(int id_user);
-    public String RegistroSalida(int id_user);
-    public String Registrouser(USER_MODEL usu);
+public interface IOpercaionesCargo {
+    public List<CargoModel> listaCArgo();
 }

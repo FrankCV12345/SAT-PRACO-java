@@ -74,12 +74,39 @@ public class OperacionesUser implements IOperacionesUser  {
                   rpta = " se registro su salida , las horas trabajadas son "+horas;
                   
                 }else{
-                rpta="no";
+                rpta="USUARIO NO EXISTE";
             }
             
             
         }catch(SQLException e){
             rpta = ""+e.getMessage();
+        }
+        return rpta;
+    }
+
+    @Override
+    public String Registrouser(USER_MODEL usu) {
+         bdConnection objCon = new bdConnection();
+        Connection con = objCon.EstablecerConexion();
+        String rpta ="";
+        try{
+            PreparedStatement pst = con.prepareStatement("{ call proc_registra_user (?,?,?,?,?,?,?,?,?,?,?,?)}");
+            pst.setString(1, usu.getNombre());
+            pst.setString(2, usu.getApellido());
+            pst.setString(3, usu.getEmail());
+            pst.setString(4,usu.getContacto());
+            pst.setInt(5, usu.getId_cargo());
+            pst.setString(6, usu.getFecha_nac());
+            pst.setString(7, usu.getEstado_civil());
+            pst.setString(8,usu.getSexo());
+            pst.setString(9,usu.getNacionalidad());
+            pst.setString(10,usu.getDomicilio());
+            pst.setInt(11, usu.getId_Docimento());
+            pst.setString(12, usu.getNro_documento());
+             pst.execute();
+            rpta = pst.getUpdateCount() > 0 ? "REGISTRADO CORRECTAMENTE" : "NO  SE PUDO REGISTRAR";
+        }catch(SQLException e){
+            rpta =""+e.getMessage();
         }
         return rpta;
     }

@@ -97,3 +97,154 @@ html,body{
     height: 90px;
     margin: 0 auto;
 }
+.container-SAT{
+    height:100%;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+.barra-menu{
+    width:  67px;
+    height: 95%;
+    background: #32325D;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    position: fixed;
+    z-index: 100;
+    left: 10px;
+    top: 10px;
+    text-align: center;
+    color: white;
+}
+.nom , .cont-items-menu{
+    width: 49px;
+    margin: 0 auto;
+}
+.cont-items-menu{
+    height: 80%;
+    margin-top: 20px;
+}
+.icons{
+    width: 45px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 10px;
+}
+.icons:hover , .cont-perfil-user:hover{
+    cursor: pointer;
+}
+
+
+.contenido{
+    width: 90%;
+    height: 100%;
+    left: 90px;
+    position: relative;
+    overflow: autos;
+}
+.cont-list-users{
+    width: 98%;
+    height: 240px;
+    max-height: 250px;
+    margin: 0 auto;
+    display: flex;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.cont-perfil-user{
+    width: 22%;
+    height: 90%;
+    max-height: 199px;
+    background: #5C85A9;
+    margin: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    color: white;
+    text-align: center; 
+}
+.cont-img-user{
+    width: 100px;
+    margin: 0 auto;
+}
+ .img-user{
+    width: 100%;
+}
+.modal-a{
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    position:fixed;
+    z-index: 200;
+    display: none;
+}
+.frm-registra-user , .frm-asigna-tarea,.div-sueldo,.div-datos-user{
+    width: 700px;
+    height: 700px;
+    background: #FFFEFE;
+    position: relative;
+    margin: 0 auto;
+    top: 5%;
+    border-radius: 10px; 
+    overflow: auto; 
+    display: none;
+}
+input[type=button] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #4CAF50;
+}
+#frm-regis-user,#frm-regis-tarea{
+    padding-top: 25px;
+    width: 80%;
+    margin: 0 auto;
+}
+.table-tareas{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+
+}
+.table-tareas tr td, .table-tareas tr th{
+    border-right:  solid 1px  black;
+    border-left:  solid 1px  black;
+    padding: 5px;
+}
+.iniciar,.terminar{
+    width: 100px;
+    height: 30px;
+    padding: 4px;
+    background-color:#03DAC6;
+    margin: 0 auto;
+}
+.iniciar:hover,.terminar:hover{
+    cursor: pointer;
+}
+.espacio{
+    height: 5px;
+}
+.sueldo{
+    position:relative;
+    top: 100px;
+    width: 600px;
+    height: 200px;
+    text-align: center;
+    margin: 0 auto;
+}
+.datos-user-frm{
+    font-size: 24px;
+    text-align: left;
+     position:relative;
+    top: 100px;
+    width: 600px;
+    height: 200px;
+    margin: 0 auto;
+}
+.custom-select{
+    font-size: 10px;
+}

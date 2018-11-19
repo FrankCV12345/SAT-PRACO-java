@@ -13,6 +13,21 @@ public class USER_MODEL {
         private int id_user,id_cargo,id_Docimento;
         private String Nombre,Apellido,Email,Contacto,fecha_nac,estado_civil,sexo,nacionalidad,domicilio,nro_documento;
 
+    public USER_MODEL( String Nombre, String Apellido, String Email, String Contacto,int id_cargo, String fecha_nac, String estado_civil, String sexo, String nacionalidad, String domicilio, int id_Docimento, String nro_documento) {
+        this.id_cargo = id_cargo;
+        this.id_Docimento = id_Docimento;
+        this.Nombre = Nombre;
+        this.Apellido = Apellido;
+        this.Email = Email;
+        this.Contacto = Contacto;
+        this.fecha_nac = fecha_nac;
+        this.estado_civil = estado_civil;
+        this.sexo = sexo;
+        this.nacionalidad = nacionalidad;
+        this.domicilio = domicilio;
+        this.nro_documento = nro_documento;
+    }
+
     public USER_MODEL(int id_user, int id_cargo, int id_Docimento, String Nombre, String Apellido, String Email, String Contacto, String fecha_nac, String estado_civil, String sexo, String nacionalidad, String domicilio, String nro_documento) {
         this.id_user = id_user;
         this.id_cargo = id_cargo;

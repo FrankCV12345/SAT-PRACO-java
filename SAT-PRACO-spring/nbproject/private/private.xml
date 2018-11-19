@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Administrador/Desktop/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/DAO/OperacionesUser.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/SAT-PRACO-java/SAT-PRACO-spring/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/Administrador/Desktop/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/CONTROLLER/indexController.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/bd/bdConnection.java</file>
-            <file>file:/C:/Users/Administrador/Desktop/SAT-PRACO-java/SAT-PRACO-spring/web/WEB-INF/jsp/Entrada.jsp</file>
-            <file>file:/C:/Users/Administrador/Desktop/SAT-PRACO-java/SAT-PRACO-spring/web/WEB-INF/jsp/index.jsp</file>
+            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/DAO/OperacionesUser.java</file>
+            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/MODEL/USER_MODEL.java</file>
+            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/CONTROLLER/indexController.java</file>
+            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-java/SAT-PRACO-spring/web/WEB-INF/jsp/adminview.jsp</file>
+            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-java/SAT-PRACO-spring/web/recursos/scripts/script.js</file>
         </group>
     </open-files>
 </project-private>

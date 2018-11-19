@@ -319,7 +319,6 @@ go
 
 
 create  PROCEDURE Proc_reg_entrada
-
 @id_user  int
 AS 
 insert  into RegistroIngreso values(SYSDATETIME (), @id_user);
@@ -346,10 +345,9 @@ Proc_verRI 2
 go
 
 create procedure proc_fechaingreso
-
 @id_usu int
 as
-select DATEDIFF(HOUR, RegistroIngreso.HoraIngreso,SYSDATETIME()) from RegistroIngreso  where  RegistroIngreso.IdUsuario = 1 and FORMAT(HoraIngreso,'dd/MM/yyyy')  = FORMAT(GETDATE(),'dd/MM/yyyy')
+select DATEDIFF(HOUR, RegistroIngreso.HoraIngreso,SYSDATETIME()) from RegistroIngreso  where  RegistroIngreso.IdUsuario = @id_usu and FORMAT(HoraIngreso,'dd/MM/yyyy')  = FORMAT(GETDATE(),'dd/MM/yyyy')
 go
 
  proc_fechaingreso 1
@@ -360,11 +358,35 @@ create procedure proc_registrasalida
 as
 insert into RegistroSalida values(SYSDATETIME(),GETDATE(),@id_usu,@horas)
 go
-proc_registrasalida 1,2
-go
-select  * from RegistroIngreso
-go
-select * from RegistroSalida
+
+create procedure proc_list_tipo_doc
+as
+select * from Documento
 go
 
-
+create procedure proc_list_cargo
+as
+select * from cargo
+go
+proc_list_cargo
+go
+create procedure proc_registra_user
+@nombres varchar(30),
+@apellidos varchar(50),
+@email varchar(150),
+@contacto varchar(14),
+@cargo int,
+@fechaNac date,
+@estadocivil char(1),
+@sexo char(1),
+@Nacionalidad varchar(50),
+@domicilio varchar(200),
+@idDoc  int,
+@nroDini varchar(14)
+as
+insert into Usuario values(@nombres,@apellidos,@email,@contacto,@cargo,@fechaNac,@estadocivil,@sexo,@Nacionalidad,@domicilio,@idDoc,@nroDini )
+go
+proc_registra_user 'pedrito','clavo un clavito','pedrito@gmail.com','990412967',1,'10/10/1996','S','M','PERUANO','CALLE SU CASA 202',1,'71055658'
+go
+select * from Usuario
+go
