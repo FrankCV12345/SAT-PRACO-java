@@ -411,7 +411,24 @@ go
 
 proc_asignaTarea '2018-11-19 20:58:14.9887806','2018-11-19 20:58:14.9887806',2,'NADA',2,2
 GO
-SELECT * FROM TareaUser
-GO
- delete from RegistroIngreso
- GO
+select * from TareaUser
+go
+create procedure proc_alteraHoraInicio
+@HoraInicio datetime,
+@idTarea int
+as
+UPDATE TareaUser SET HoraInicio =@HoraInicio WHERE IdTareaUser = @idTarea
+go
+
+create procedure proc_alteraHoraTermino
+@HoraTermino datetime,
+@idTarea int
+as
+UPDATE TareaUser SET HoraTermino =@HoraTermino WHERE IdTareaUser = @idTarea
+go
+
+
+ proc_alteraHoraInicio '2018-11-19 12:40:20',9
+ go
+ proc_alteraHoraTermino '2018-11-19 12:40:20',9
+ go
