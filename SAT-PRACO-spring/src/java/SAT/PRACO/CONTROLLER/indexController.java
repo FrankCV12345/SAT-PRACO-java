@@ -15,6 +15,7 @@ import SAT.PRACO.DAO.OpercaionesModel;
 import SAT.PRACO.MODEL.documentoModel;
 import SAT.PRACO.MODEL.CargoModel;
 import SAT.PRACO.MODEL.USER_MODEL;
+import SAT.PRACO.MODEL.model_tareaUser;
 import SAT.PRACO.DAO.OperacionesTipoDoc;
 import com.google.gson.Gson;
 import java.util.List;
@@ -69,6 +70,16 @@ public class indexController {
         return rpta; 
     }
    
+    @RequestMapping(value="/registratarea",method = RequestMethod.GET)
+   public @ResponseBody String RegistraTarea(@RequestBody String objtarea){
+        OperacionesUser opeUser = new OperacionesUser();
+        model_tareaUser tarea  = new model_tareaUser(1,1,8,"2018-11-19 20:58:14.9887806","2018-11-19 20:58:14.9887806","asdasd");
+        //USER_MODEL("pedrito","clavo","pedrito@gmail.com","990412967",2,"10/10/1996","S","M","PERUANO","SU CASA 4",1,"71055663");
+       
+        String rpta =opeUser.Registarea(tarea);
+        return rpta; 
+    }
+   
       @RequestMapping(value="/listaTipoDoc",method = RequestMethod.GET, produces="application/json")
    public @ResponseBody List<documentoModel> listaDoc(){
         OperacionesTipoDoc opeTIpoDOc = new OperacionesTipoDoc();
@@ -82,5 +93,5 @@ public class indexController {
         return listacargos; 
     }
     
-    
 }
+    

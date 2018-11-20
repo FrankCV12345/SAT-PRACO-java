@@ -3,7 +3,29 @@ Go
 
 Use BDSatPraco
 Go
-	
+create Table Usuario
+(
+	IdUsuario            int	IDENTITY(1,1)		NOT NULL,
+	Nombre               varchar(30)	NOT NULL,
+	Apellido             varchar(50)	NOT NULL,
+	Email                varchar(150)	NOT NULL,
+	Contacto             varchar(14)	NOT NULL,
+	IdCargo              int			NOT NULL,
+	FechaNacimiento      date			NOT NULL,
+	EstadoCivil			 char(1)		NOT NULL,
+	Sexo                 char(1)		NOT NULL,
+	Nacionalidad         varchar(50)	NOT NULL,
+	Domicilio            varchar(200)	NOT NULL,
+	IdDocumento          int			NOT NULL,
+	NumeroDNI            varchar(14)	NOT NULL 
+)
+Go
+--=============TABLA Usuario===============9=
+Alter Table Usuario
+	Add	Constraint	PK_Usuario
+	Primary	Key		(IdUsuario)
+Go
+
 --====================================================================================================================================================================================
 --																					AGREGANDO TABLAS
 --====================================================================================================================================================================================
@@ -87,7 +109,7 @@ Go
 --=============TABLA ListTareas===============6=
 CREATE TABLE ListTareas
 ( 
-	IdTarea             int			NOT NULL,
+	IdTarea             int		IDENTITY(1,1)	NOT NULL,
 	Descripcion         varchar(100)NOT NULL,
 	CantidadHoras       int			NOT NULL,
 	Estado              char(1)		NOT NULL 
@@ -111,14 +133,14 @@ Go
 --=============TABLA TareaUser=====================8=
 Create Table TareaUser
 (
-	IdTareaUser          int		NOT NULL,
-	HoraInicio          datetime	NOT NULL,
-	HoraTermino         datetime	NOT NULL,
+	IdTareaUser          int	IDENTITY(1,1)	NOT NULL,
+	HoraInicio          datetime	 NULL,
+	HoraTermino         datetime	 NULL,
 	FechaTarea          datetime	NOT NULL,
 	HoraInicioE        datetime	NOT NULL,
 	HoraTerminoE       datetime	NOT NULL,
 	IdUsuario           int		NOT NULL,
-	Observacion          varchar(200)  NOT NULL,
+	Observacion          varchar(200)   NULL,
 	IdTarea             int		NOT NULL,
 	IdSupervisor        int		NOT NULL
 )
@@ -126,40 +148,7 @@ Go
 --================================================
 
 --=============TABLA Usuario====================9=
-create Table Usuario
-(
-	IdUsuario            int	IDENTITY(1,1)		NOT NULL,
-	Nombre               varchar(30)	NOT NULL,
-	Apellido             varchar(50)	NOT NULL,
-	Email                varchar(150)	NOT NULL,
-	Contacto             varchar(14)	NOT NULL,
-	IdCargo              int			NOT NULL,
-	FechaNacimiento      date			NOT NULL,
-	EstadoCivil			 char(1)		NOT NULL,
-	Sexo                 char(1)		NOT NULL,
-	Nacionalidad         varchar(50)	NOT NULL,
-	Domicilio            varchar(200)	NOT NULL,
-	IdDocumento          int			NOT NULL,
-	NumeroDNI            varchar(14)	NOT NULL 
-)
-Go
---=============TABLA Usuario===============9=
-Alter Table Usuario
-	Add	Constraint	PK_Usuario
-	Primary	Key		(IdUsuario)
-Go
---=============TABLA Usuario==================9=
-Alter Table Usuario
-	Add Constraint	FK_Usuario_Cargo
-	Foreign Key		(IdCargo)
-	References		Cargo(IdCargo)
-Go
 
-Alter Table Usuario
-	Add Constraint	FK_Usuario_Documento
-	Foreign Key		(IdDocumento)
-	References		Documento(IdDocumento)
-Go
 --============================================
 --================================================
 
@@ -288,6 +277,18 @@ Alter Table TareaUser
 	Foreign Key		(IdTarea)
 	References		ListTareas(IdTarea)
 Go
+--=============TABLA Usuario==================9=
+Alter Table Usuario
+	Add Constraint	FK_Usuario_Cargo
+	Foreign Key		(IdCargo)
+	References		Cargo(IdCargo)
+Go
+
+Alter Table Usuario
+	Add Constraint	FK_Usuario_Documento
+	Foreign Key		(IdDocumento)
+	References		Documento(IdDocumento)
+Go
 --==============================================
 
 
@@ -390,3 +391,27 @@ proc_registra_user 'pedrito','clavo un clavito','pedrito@gmail.com','990412967',
 go
 select * from Usuario
 go
+
+insert into ListTareas values('IR A DEJAR FACTURA',2,'1')
+go
+select * from ListTareas
+go
+
+
+CREATE PROCEDURE proc_asignaTarea
+@horarinicioE DATE,
+@horaTerminoE DATE,
+@id_user int,
+@observacion varchar(200),
+@idTarea int,
+@idSupervisor int
+as
+insert into TareaUser values(NULL,NULL,SYSDATETIME(),CONVERT(DATETIME,@horarinicioE,5),CONVERT(DATETIME,@horaTerminoE,5),@id_user,@observacion,@idTarea,@idSupervisor)
+go
+
+proc_asignaTarea '2018-11-19 20:58:14.9887806','2018-11-19 20:58:14.9887806',2,'NADA',2,2
+GO
+SELECT * FROM TareaUser
+GO
+ delete from RegistroIngreso
+ GO

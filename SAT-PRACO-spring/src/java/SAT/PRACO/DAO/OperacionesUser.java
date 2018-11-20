@@ -7,6 +7,7 @@ package SAT.PRACO.DAO;
 import SAT.PRACO.bd.bdConnection;
 import SAT.PRACO.IDAO.IOperacionesUser;
 import SAT.PRACO.MODEL.USER_MODEL;
+import SAT.PRACO.MODEL.model_tareaUser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -109,6 +110,28 @@ public class OperacionesUser implements IOperacionesUser  {
             rpta =""+e.getMessage();
         }
         return rpta;
+    }
+
+    @Override
+    public String Registarea(model_tareaUser tarea) {
+        bdConnection objCon = new bdConnection();
+        Connection con = objCon.EstablecerConexion();
+        String rpta ="";
+        try{
+            PreparedStatement pst = con.prepareStatement("{ call proc_asignaTarea    (?,?,?,?,?,?)}");
+            pst.setString(1,tarea.getHoraInicioE());
+            pst.setString(2,tarea.getHoraTerminoE());
+            pst.setInt(3,tarea.getIdUser());
+            pst.setString(4,tarea.getObservacion());
+            pst.setInt(5,tarea.getIdtarealst());
+            pst.setInt(6,tarea.getIdsupervisor());
+            pst.execute();
+            rpta = pst.getUpdateCount() > 0 ? "REGISTRADO CORRECTAMENTE" : "NO  SE PUDO REGISTRAR";
+        }catch(SQLException e){
+             rpta =""+e.getMessage();
+    }
+        return rpta;
+        
     }
     
 }
