@@ -409,9 +409,9 @@ as
 insert into TareaUser values(NULL,NULL,SYSDATETIME(),CONVERT(DATETIME,@horarinicioE,5),CONVERT(DATETIME,@horaTerminoE,5),@id_user,@observacion,@idTarea,@idSupervisor)
 go
 
-proc_asignaTarea '2018-11-19 20:58:14.9887806','2018-11-19 20:58:14.9887806',2,'NADA',2,2
+proc_asignaTarea '2018-11-19 20:58:14.9887806','2018-11-19 20:58:14.9887806',2,'NADA',1,2
 GO
-select * from TareaUser
+select * from ListTareas
 go
 create procedure proc_alteraHoraInicio
 @HoraInicio datetime,

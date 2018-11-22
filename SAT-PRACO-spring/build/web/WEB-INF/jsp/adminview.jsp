@@ -59,7 +59,7 @@
                                     <div class="form-group row">
                                       <label for="example-datetime-local-input" class="col-2 col-form-label">FECHA NACIMIENTO</label>
                                       <div class="col-10">
-                                        <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="fechanac">
+                                        <input class="form-control" type="datetime" id="fechanac">
                                       </div>
                                     </div>
                                     <div class="input-group mb-3">

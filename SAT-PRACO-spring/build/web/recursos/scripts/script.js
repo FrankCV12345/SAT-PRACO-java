@@ -64,14 +64,29 @@ function RegistraUser(){
                             
                             
     });*/
+    alert(nombre+"-"+apellidos+"-"+dni+"-"+tipoDoc+"-"+email+"-"+telefono+"-"+cargo+"-"+fechnac+"-"+estadoCivil+"-"+sexo+"-"+nacionalidad+"-"+domicilio);
     $.ajax({
-  type: "POST",
-  url: "/SAT-PRACO-spring/registrauser",
-  data: JSON.stringify({nombre :nombre,apellidos:apellidos,email:email,telefono:telefono,cargo:cargo,fechnac:fechnac,estadoCivil:estadoCivil,sexo :sexo,nacionalidad :nacionalidad,domicilio:domicilio,tipoDoc :tipoDoc,dni:dni}),
-    success: function(data){
-        alert(data);
-    },
-    dataType: "application/json"
+        type: "post",
+        url: "/SAT-PRACO-spring/registrauser",
+        contentType: "application/json",
+        data: JSON.stringify({
+            Nombre :nombre,
+            Apellido:apellidos,
+            Email:email,
+            Contacto:telefono,
+            id_cargo:cargo,
+            fecha_nac:fechnac,
+            estado_civil:estadoCivil,
+            sexo :sexo,
+            nacionalidad :nacionalidad,
+            domicilio:domicilio,
+            id_Docimento :tipoDoc,
+            nro_documento:dni}),
+          success: function(data){
+              alert(data);
+          },error:function(){
+              alert("no funca");
+          }
         });
   
     

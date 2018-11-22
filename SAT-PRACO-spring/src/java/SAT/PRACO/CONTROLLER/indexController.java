@@ -61,11 +61,10 @@ public class indexController {
         return rpta; 
     }
      @RequestMapping(value="/registrauser",method = RequestMethod.POST)
-   public @ResponseBody String registrUser(@RequestBody String objuser){
+   public @ResponseBody String registrUser(@RequestBody String objJson){
         OperacionesUser opeUser = new OperacionesUser();
-        USER_MODEL usuario  = new Gson().fromJson(objuser, USER_MODEL.class);
+        USER_MODEL usuario  = new Gson().fromJson(objJson, USER_MODEL.class);
         //USER_MODEL("pedrito","clavo","pedrito@gmail.com","990412967",2,"10/10/1996","S","M","PERUANO","SU CASA 4",1,"71055663");
-       
         String rpta =opeUser.Registrouser(usuario);
         return rpta; 
     }
