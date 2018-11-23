@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import SAT.PRACO.DAO.OperacionesUser;
 import SAT.PRACO.DAO.OpercaionesModel;
+import SAT.PRACO.DAO.OperacionesTarea;
+import SAT.PRACO.MODEL.Tarea_model;
 import SAT.PRACO.MODEL.documentoModel;
 import SAT.PRACO.MODEL.CargoModel;
 import SAT.PRACO.MODEL.USER_MODEL;
@@ -27,7 +29,7 @@ import java.util.List;
 @Controller
 public class indexController {
     OperacionesUser opeuser = new OperacionesUser();
-    
+    OperacionesTarea operTarea = new OperacionesTarea();
     
     
     @RequestMapping(value="/",method= RequestMethod.GET)
@@ -42,12 +44,28 @@ public class indexController {
     public String ViewAdmin(){
     return "adminview";
     }
-    
+    @RequestMapping(value="/empleado",method= RequestMethod.GET)
+    public String ViewEmpleado(){
+    return "EmpleadoView";
+    }
+    @RequestMapping(value="/login",method= RequestMethod.GET)
+    public String ViewLogin(){
+    return "Login";
+    }
    /* public @ResponseBody String RegistraEntrada(){
         return "ADASDSD"; 
     }*/
    @RequestMapping(value="/registraIngreso",method = RequestMethod.POST)
    public @ResponseBody String RegistraEntrada(@RequestBody String id_user){
+        OperacionesUser opeUser = new OperacionesUser();
+        String  n = id_user.replaceAll("id_user=E", "");
+        int id = Integer.parseInt(n);
+        //int id = Integer.parseInt(id_user);
+        String rpta = opeUser.RegistraIngreso(id);
+        return rpta; 
+    }
+    @RequestMapping(value="/Loguear",method = RequestMethod.POST)
+   public @ResponseBody String Loguear(@RequestBody String id_user){
         OperacionesUser opeUser = new OperacionesUser();
         String  n = id_user.replaceAll("id_user=E", "");
         int id = Integer.parseInt(n);
@@ -72,17 +90,18 @@ public class indexController {
         String rpta =opeUser.Registrouser(usuario);
         return rpta; 
     }
-   
     @RequestMapping(value="/registratarea",method = RequestMethod.POST)
    public @ResponseBody String RegistraTarea(@RequestBody String objJson){
-        OperacionesUser opeUser = new OperacionesUser();
         model_tareaUser tarea  = new Gson().fromJson(objJson, model_tareaUser.class);
-        //USER_MODEL("pedrito","clavo","pedrito@gmail.com","990412967",2,"10/10/1996","S","M","PERUANO","SU CASA 4",1,"71055663");
-       
-        String rpta =opeUser.Registarea(tarea);
+        String rpta =opeuser.Registarea(tarea);
         return rpta; 
     }
    
+      @RequestMapping(value="/listaTareas",method = RequestMethod.GET, produces="application/json")
+   public @ResponseBody List<Tarea_model> listaTareas(){
+        List<Tarea_model> lstTareas = operTarea.listaTareas() ;
+        return lstTareas; 
+    }
       @RequestMapping(value="/listaTipoDoc",method = RequestMethod.GET, produces="application/json")
    public @ResponseBody List<documentoModel> listaDoc(){
         OperacionesTipoDoc opeTIpoDOc = new OperacionesTipoDoc();
@@ -97,10 +116,23 @@ public class indexController {
     }
       @RequestMapping(value="/listausers",method = RequestMethod.GET, produces="application/json")
    public @ResponseBody List<USER_MODEL> listaUser(){
-        
         List<USER_MODEL> listaUser = opeuser.ListaUsers();
         return listaUser; 
     }
-    
+  
+   /* @RequestMapping(value="/listaTareasPorUser",method = RequestMethod.GET)
+   public @ResponseBody String listaTareasPorUser(@RequestBody String id){
+       //USER_MODEL usuario  = new Gson().fromJson(objJson, USER_MODEL.class);
+       //int id = Integer.parseInt(idu);
+        //List<model_tareaUser> listaUser = opeuser.listaTareasPorUSer(3);
+        return id; 
+    }*/
+      @RequestMapping(value="/listaTareasPorUser",method = RequestMethod.POST, produces="application/json")
+   public @ResponseBody List<model_tareaUser>  listaTareasPorUser(@RequestBody String id_user){
+          String  n = id_user.replaceAll("id=", "");
+        int id = Integer.parseInt(n);
+        List<model_tareaUser> lsta  = opeuser.listaTareasPorUSer(id);
+        return lsta; 
+    }
 }
     

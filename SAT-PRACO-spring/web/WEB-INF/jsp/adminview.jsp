@@ -105,20 +105,27 @@
                                         <option selected>Selecione</option>
                                       </select>
                                 </div>
+                            <div class="input-group mb-3">
+                                      <div class="input-group-prepend">
+                                        <label class="input-group-text" for="">Tareas</label>
+                                      </div>
+                                      <select class="custom-select" id="lstTreas">
+                                        <option selected>Selecione</option>
+                                      </select>
+                                </div>
                                     <div class="form-group">
-                                        <label for="exampleFormControlTextarea1">Tarea</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <label for="exampleFormControlTextarea1">detalles</label>
+                                        <textarea class="form-control" id="Descripcion" rows="3"></textarea>
                                         <label for="example-datetime-local-input" class="col-2 col-form-label">DESDE</label>
                                           <div class="col-10">
-                                            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="">
+                                            <input class="form-control" type="datetime-local" id="fechaInicioE">
                                           </div>
                                            <label for="example-datetime-local-input" class="col-2 col-form-label">HASTA</label>
                                           <div class="col-10">
-                                            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="">
+                                            <input class="form-control" type="datetime-local"  id="fechaFinE">
                                           </div>
-
                                   </div>
-                            <input type="button" name="" value="GUARDAR">
+                            <input type="button" name="" value="GUARDAR" onclick="RegistraTarea()">
                             <input type="button" name="" value="X" onclick="MostrarModal('frm-asigna-tarea')">
                         </form>
                     </div>

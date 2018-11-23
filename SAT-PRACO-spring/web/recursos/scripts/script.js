@@ -36,6 +36,12 @@ function MostrarModal( frm){
                                 $("#lstUsers").append("<option value='"+data[i].id_user+"'>"+data[i].nombre+"</option>")  ;
                             }
                         });
+                        $.get("/SAT-PRACO-spring/listaTareas",
+                        function(data){
+                            for(i=0; i < data.length;i++){
+                                $("#lstTreas").append("<option value='"+data[i].idTarea+"'>"+data[i].descripcion+"</option>")  ;
+                            }
+                        });
                     }
                     
 			modal[0].style.display = "block";
@@ -44,6 +50,7 @@ function MostrarModal( frm){
                         
 		
 		}	else{
+                    
 			modal[0].style.display = "none";
 			frmh[0].style.display ="none";
 			bandera = true;
@@ -96,16 +103,25 @@ function formato(texto){
    var newFecha = Fecha[0]+" "+Fecha[1];
    return newFecha;
 }
- function registra(){
-     
+ function RegistraTarea(){
+     var idTarea = $("#lstTreas").val();
+     var idSupervisor = 1;
+     var idUsuario = $("#lstUsers").val();
+     var fechaInicioE =formato($("#fechaInicioE").val());
+     var fechaFinE = formato($("#fechaFinE").val());
+     var obvs = $("#Descripcion").val();
+     //alert(fechaInicioE+"   "+fechaFinE);
       $.ajax({
         type: "post",
-        url: "/SAT-PRACO-spring/registrauser",
+        url: "/SAT-PRACO-spring/registratarea",
         contentType: "application/json",
         data: JSON.stringify({
-            Nombre :nombre,
-            Apellido:apellidos,
-            Email:email
+            idtarealst :idTarea,
+            idsupervisor:idSupervisor,
+            idUser:idUsuario,
+            HoraInicioE:fechaInicioE,
+            HoraTerminoE:fechaFinE,
+            observacion:obvs
             }),
           success: function(data){
               alert(data);
@@ -114,3 +130,44 @@ function formato(texto){
           }
         });
  }
+ 
+ function listTareasPorUser(){
+      var idUsuario = 3;
+      $.ajax({
+        type: "post",
+        url: "/SAT-PRACO-spring/listaTareasPorUser",
+        //contentType: "application/json",
+        data: {id:idUsuario},
+        success: function(data){
+              alert(data);
+          },
+        error:function(){
+              alert("no funca");
+          }
+        });
+   
+     
+ }
+ function Login(){
+     var nombre = $("#idusu").val();
+     if (typeof(Storage) !== "undefined") {
+        sessionStorage.setItem("nombre", nombre);
+        location.href  ="http://localhost:8090/SAT-PRACO-spring/empleado";
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    }
+ }
+ function muestraDatos(){
+     
+     
+     if(sessionStorage.getItem("nombre") === null){
+        location.href  ="http://localhost:8090/SAT-PRACO-spring/login";
+     }else{
+         alert(sessionStorage.getItem("nombre"));
+     }
+ }
+ function BorrrarSeccion(){
+     sessionStorage.clear();
+     location.href  ="http://localhost:8090/SAT-PRACO-spring/login";
+ }
+ 

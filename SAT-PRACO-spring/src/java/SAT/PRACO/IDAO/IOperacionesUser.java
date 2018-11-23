@@ -17,4 +17,5 @@ public interface IOperacionesUser {
     public String Registrouser(USER_MODEL usu);
     public String Registarea(model_tareaUser tarea);
     public List<USER_MODEL> ListaUsers();
+    public List<model_tareaUser> listaTareasPorUSer(int id_user);
 }

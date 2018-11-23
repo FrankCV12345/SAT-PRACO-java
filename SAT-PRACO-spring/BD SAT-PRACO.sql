@@ -17,7 +17,7 @@ create Table Usuario
 	Nacionalidad         varchar(50)	NOT NULL,
 	Domicilio            varchar(200)	NOT NULL,
 	IdDocumento          int			NOT NULL,
-	NumeroDNI            varchar(14)	NOT NULL 
+	NumeroDNI            varchar(14)	NOT NULL, 
 )
 Go
 --=============TABLA Usuario===============9=
@@ -394,6 +394,8 @@ go
 
 insert into ListTareas values('IR A DEJAR FACTURA',2,'1')
 go
+insert into ListTareas values('REDACTAR INFORME MENSUAL',18,'1')
+go
 select * from ListTareas
 go
 
@@ -432,9 +434,25 @@ go
  go
  proc_alteraHoraTermino '2018-11-19 12:40:20',9
  go
- select * from Usuario
- go
+
  create procedure proc_listaUser
  as
  select Usuario.IdUsuario,Usuario.Nombre from Usuario
  go
+ create procedure proc_listTareas
+ as 
+ select * from ListTareas where ListTareas.Estado = '1'
+ go
+create procedure proc_listTareasPorUser
+@id_user int
+as
+select * from TareaUser where TareaUser.IdUsuario = @id_user
+go
+proc_listTareasPorUser 3
+go
+
+create procedure Proc_Login
+ @id_usu int
+ as
+ select IdUsuario,Nombre,Apellido,IdCargo from Usuario where Usuario.IdUsuario =  @id_usu
+go

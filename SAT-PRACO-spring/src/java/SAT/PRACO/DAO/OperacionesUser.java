@@ -138,12 +138,13 @@ public class OperacionesUser implements IOperacionesUser  {
 
     @Override
     public List<USER_MODEL> ListaUsers() {
-         bdConnection objCon = new bdConnection();
+        bdConnection objCon = new bdConnection();
         Connection con = objCon.EstablecerConexion();
         String rpta ="";
         List<USER_MODEL> listaUSer = new ArrayList<>();
         try{
             PreparedStatement pst = con.prepareStatement("proc_listaUser");
+           
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
                 listaUSer.add(new USER_MODEL(rs.getInt(1),rs.getString(2)));
@@ -155,24 +156,36 @@ public class OperacionesUser implements IOperacionesUser  {
         }
         return listaUSer;
     }
-    
-}
-/*
- bdConnection objCon = new bdConnection();
+
+    @Override
+    public List<model_tareaUser> listaTareasPorUSer(int id_user) {
+         bdConnection objCon = new bdConnection();
         Connection con = objCon.EstablecerConexion();
         String rpta ="";
-        List<CargoModel> listacargo = new ArrayList<>();
-         try{
-            PreparedStatement pst = con.prepareStatement("{ call proc_list_cargo}");
+        List<model_tareaUser> listaTareas = new ArrayList<>();
+        try{
+            PreparedStatement pst = con.prepareStatement("{ call proc_listTareasPorUser (?)}");
+            pst.setInt(1, id_user);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
-                listacargo.add(new CargoModel(rs.getInt(1),rs.getString(2)) );
+                listaTareas.add(
+                        new model_tareaUser(
+                        rs.getInt(1),
+                        rs.getInt(7),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getString(2)
+                        ,rs.getString(3),
+                         rs.getString(4),
+                         rs.getString(5)
+                         ,rs.getString(6),
+                          rs.getString(7)
+                        ));
             }
-            objCon.desconectar();
-        }catch( SQLException e){
-             
-            rpta = ""+e;
+        }catch(SQLException e){
+            rpta = ""+e.getMessage();
         }
-        return listacargo;
-        
-    }*/
+        return listaTareas;
+    }
+    
+}
