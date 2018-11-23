@@ -59,7 +59,7 @@
                                     <div class="form-group row">
                                       <label for="example-datetime-local-input" class="col-2 col-form-label">FECHA NACIMIENTO</label>
                                       <div class="col-10">
-                                        <input class="form-control" type="datetime" id="fechanac">
+                                        <input class="form-control" type="datetime-local" onclick="verFecha()" id="fechanac">
                                       </div>
                                     </div>
                                     <div class="input-group mb-3">
@@ -101,11 +101,8 @@
                                       <div class="input-group-prepend">
                                         <label class="input-group-text" for="">Empleado</label>
                                       </div>
-                                      <select class="custom-select" id="">
+                                      <select class="custom-select" id="lstUsers">
                                         <option selected>Selecione</option>
-                                        <option value="1">juan</option>
-                                        <option value="2">Pedro</option>
-                                        <option value="3">antonia</option>
                                       </select>
                                 </div>
                                     <div class="form-group">

@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OperacionesUser implements IOperacionesUser  {
 
@@ -133,5 +135,44 @@ public class OperacionesUser implements IOperacionesUser  {
         return rpta;
         
     }
+
+    @Override
+    public List<USER_MODEL> ListaUsers() {
+         bdConnection objCon = new bdConnection();
+        Connection con = objCon.EstablecerConexion();
+        String rpta ="";
+        List<USER_MODEL> listaUSer = new ArrayList<>();
+        try{
+            PreparedStatement pst = con.prepareStatement("proc_listaUser");
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                listaUSer.add(new USER_MODEL(rs.getInt(1),rs.getString(2)));
+                
+            }
+            
+        }catch(SQLException e){
+            rpta = ""+e.getMessage();
+        }
+        return listaUSer;
+    }
     
 }
+/*
+ bdConnection objCon = new bdConnection();
+        Connection con = objCon.EstablecerConexion();
+        String rpta ="";
+        List<CargoModel> listacargo = new ArrayList<>();
+         try{
+            PreparedStatement pst = con.prepareStatement("{ call proc_list_cargo}");
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                listacargo.add(new CargoModel(rs.getInt(1),rs.getString(2)) );
+            }
+            objCon.desconectar();
+        }catch( SQLException e){
+             
+            rpta = ""+e;
+        }
+        return listacargo;
+        
+    }*/

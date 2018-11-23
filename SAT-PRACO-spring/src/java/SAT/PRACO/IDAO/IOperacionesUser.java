@@ -6,6 +6,7 @@
 package SAT.PRACO.IDAO;
 import SAT.PRACO.MODEL.USER_MODEL;
 import SAT.PRACO.MODEL.model_tareaUser;
+import java.util.List;
 /**
  *
  * @author SARA
@@ -15,4 +16,5 @@ public interface IOperacionesUser {
     public String RegistroSalida(int id_user);
     public String Registrouser(USER_MODEL usu);
     public String Registarea(model_tareaUser tarea);
+    public List<USER_MODEL> ListaUsers();
 }

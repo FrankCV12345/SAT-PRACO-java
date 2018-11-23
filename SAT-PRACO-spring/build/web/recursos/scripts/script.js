@@ -29,6 +29,13 @@ function MostrarModal( frm){
                             }
                         });
                         
+                    }else if(frm === "frm-asigna-tarea"){
+                        $.get("/SAT-PRACO-spring/listausers",
+                        function(data){
+                            for(i=0; i < data.length;i++){
+                                $("#lstUsers").append("<option value='"+data[i].id_user+"'>"+data[i].nombre+"</option>")  ;
+                            }
+                        });
                     }
                     
 			modal[0].style.display = "block";
@@ -52,20 +59,12 @@ function RegistraUser(){
     var email = $("#email").val();
     var telefono = $("#telefono").val();
     var cargo =  parseInt($("#list-cargo").val());
-    var fechnac = $("#fechanac").val();
+    var fechnac = formato($("#fechanac").val());
     var estadoCivil = $("#estacivil").val();
     var sexo = $("#sexo").val();
     var nacionalidad = $("#nacionalidad").val();
     var domicilio = $("#domicilio").val();
-    //alert("1 :"+nombre+" 2:"+apellidos+" 3:"+email+" 4:"+telefono+" 5:"+cargo+" 6:"+fechnac+" 7:"+estadoCivil+" 8:"+sexo+" 9:"+nacionalidad+" 10:"+domicilio+" 11:"+tipoDoc+" 12:"+dni);
-    /*$.post("/SAT-PRACO-spring/registrauser",JSON.stringify({nombre :nombre,apellidos:apellidos,email:email,telefono:telefono,cargo:cargo,fechnac:fechnac,estadoCivil:estadoCivil,sexo :sexo,nacionalidad :nacionalidad,domicilio:domicilio,tipoDoc :tipoDoc,dni:dni}),
-                        function(data){
-                            alert(data);
-                            
-                            
-    });*/
-    alert(nombre+"-"+apellidos+"-"+dni+"-"+tipoDoc+"-"+email+"-"+telefono+"-"+cargo+"-"+fechnac+"-"+estadoCivil+"-"+sexo+"-"+nacionalidad+"-"+domicilio);
-    $.ajax({
+     $.ajax({
         type: "post",
         url: "/SAT-PRACO-spring/registrauser",
         contentType: "application/json",
@@ -92,3 +91,26 @@ function RegistraUser(){
     
 }
 
+function formato(texto){
+   var Fecha = texto.split("T");
+   var newFecha = Fecha[0]+" "+Fecha[1];
+   return newFecha;
+}
+ function registra(){
+     
+      $.ajax({
+        type: "post",
+        url: "/SAT-PRACO-spring/registrauser",
+        contentType: "application/json",
+        data: JSON.stringify({
+            Nombre :nombre,
+            Apellido:apellidos,
+            Email:email
+            }),
+          success: function(data){
+              alert(data);
+          },error:function(){
+              alert("no funca");
+          }
+        });
+ }

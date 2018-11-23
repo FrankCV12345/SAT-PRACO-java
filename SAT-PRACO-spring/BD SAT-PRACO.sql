@@ -432,3 +432,9 @@ go
  go
  proc_alteraHoraTermino '2018-11-19 12:40:20',9
  go
+ select * from Usuario
+ go
+ create procedure proc_listaUser
+ as
+ select Usuario.IdUsuario,Usuario.Nombre from Usuario
+ go

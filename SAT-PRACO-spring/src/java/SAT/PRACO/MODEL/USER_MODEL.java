@@ -28,6 +28,11 @@ public class USER_MODEL {
         this.nro_documento = nro_documento;
     }
 
+    public USER_MODEL(int id_user, String Nombre) {
+        this.id_user = id_user;
+        this.Nombre = Nombre;
+    }
+
     public USER_MODEL(int id_user, int id_cargo, int id_Docimento, String Nombre, String Apellido, String Email, String Contacto, String fecha_nac, String estado_civil, String sexo, String nacionalidad, String domicilio, String nro_documento) {
         this.id_user = id_user;
         this.id_cargo = id_cargo;

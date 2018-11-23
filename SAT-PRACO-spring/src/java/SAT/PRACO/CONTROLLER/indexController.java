@@ -26,6 +26,10 @@ import java.util.List;
  */
 @Controller
 public class indexController {
+    OperacionesUser opeuser = new OperacionesUser();
+    
+    
+    
     @RequestMapping(value="/",method= RequestMethod.GET)
     public String index(){
     return "Entrada";
@@ -69,10 +73,10 @@ public class indexController {
         return rpta; 
     }
    
-    @RequestMapping(value="/registratarea",method = RequestMethod.GET)
-   public @ResponseBody String RegistraTarea(@RequestBody String objtarea){
+    @RequestMapping(value="/registratarea",method = RequestMethod.POST)
+   public @ResponseBody String RegistraTarea(@RequestBody String objJson){
         OperacionesUser opeUser = new OperacionesUser();
-        model_tareaUser tarea  = new model_tareaUser(1,1,8,"2018-11-19 20:58:14.9887806","2018-11-19 20:58:14.9887806","asdasd");
+        model_tareaUser tarea  = new Gson().fromJson(objJson, model_tareaUser.class);
         //USER_MODEL("pedrito","clavo","pedrito@gmail.com","990412967",2,"10/10/1996","S","M","PERUANO","SU CASA 4",1,"71055663");
        
         String rpta =opeUser.Registarea(tarea);
@@ -90,6 +94,12 @@ public class indexController {
         OpercaionesModel opecargo = new OpercaionesModel();
         List<CargoModel> listacargos = opecargo.listaCArgo();
         return listacargos; 
+    }
+      @RequestMapping(value="/listausers",method = RequestMethod.GET, produces="application/json")
+   public @ResponseBody List<USER_MODEL> listaUser(){
+        
+        List<USER_MODEL> listaUser = opeuser.ListaUsers();
+        return listaUser; 
     }
     
 }
