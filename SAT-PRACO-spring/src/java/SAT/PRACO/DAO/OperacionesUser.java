@@ -179,7 +179,7 @@ public class OperacionesUser implements IOperacionesUser  {
                          rs.getString(4),
                          rs.getString(5)
                          ,rs.getString(6),
-                          rs.getString(7)
+                          rs.getString(8)
                         ));
             }
         }catch(SQLException e){
@@ -187,5 +187,27 @@ public class OperacionesUser implements IOperacionesUser  {
         }
         return listaTareas;
     }
+
+    @Override
+    public USER_MODEL Login(int iduser) {
+         bdConnection objCon = new bdConnection();
+        Connection con = objCon.EstablecerConexion();
+        String rpta ="";
+        USER_MODEL user = null;
+        try{
+            PreparedStatement pst = con.prepareStatement("{ call Proc_Login (?)}");
+            pst.setInt(1, iduser);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                user = new USER_MODEL(rs.getInt(1),rs.getInt(4),rs.getString(2),rs.getString(3));
+            }
+            
+        }catch(SQLException e){
+            rpta = ""+e.getMessage();
+        }
+       return user;
+    }
+
+ 
     
 }

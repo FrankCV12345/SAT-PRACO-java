@@ -1,6 +1,6 @@
  <div class="barra-menu">
                     <div class="nom">
-                        <h2>FC </h2>   
+                        <h3 id="inicialies">FC </h3>   
                         <div class="line"></div>
                     </div>
                     <div class="cont-items-menu">

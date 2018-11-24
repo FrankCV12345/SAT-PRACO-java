@@ -131,39 +131,71 @@ function formato(texto){
         });
  }
  
- function listTareasPorUser(){
-      var idUsuario = 3;
+ function listTareasPorUser(user){
+      var idUsuario = user;
+      //var tareas ="sadsadad";
       $.ajax({
         type: "post",
         url: "/SAT-PRACO-spring/listaTareasPorUser",
         //contentType: "application/json",
         data: {id:idUsuario},
         success: function(data){
-              alert(data);
+              console.log("tareas",data);
+          },
+        error:function(){
+              console.log("tareas","error");
+          }
+        });
+   
+     //return tareas;
+ }
+ function Login(){
+     var nombre = $("#idusu").val();
+     if (typeof(Storage) !== "undefined") {
+        
+        
+         $.ajax({
+        type: "post",
+        url: "/SAT-PRACO-spring/Loguear",
+        //contentType: "application/json",
+        data: {id_user:nombre},
+        success: function(data){
+              //alert(data);
+              if(data === ""){
+                  //location.href  ="http://localhost:8090/SAT-PRACO-spring/empleado";
+                  alert("usuario incorrecto")
+              }else{
+                  location.href  ="http://localhost:8090/SAT-PRACO-spring/empleado";
+                    sessionStorage.setItem("datosUser",JSON.stringify(data));
+                    location.href  ="http://localhost:8090/SAT-PRACO-spring/empleado";
+              }
           },
         error:function(){
               alert("no funca");
           }
         });
-   
-     
- }
- function Login(){
-     var nombre = $("#idusu").val();
-     if (typeof(Storage) !== "undefined") {
-        sessionStorage.setItem("nombre", nombre);
-        location.href  ="http://localhost:8090/SAT-PRACO-spring/empleado";
+        
+        
+        
+        
     } else {
-        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        alert("SU NAVEGADOR NO SOPORTA LOCALSTORAGE");
     }
  }
  function muestraDatos(){
      
      
-     if(sessionStorage.getItem("nombre") === null){
+     if(sessionStorage.getItem("datosUser") === null){
         location.href  ="http://localhost:8090/SAT-PRACO-spring/login";
      }else{
-         alert(sessionStorage.getItem("nombre"));
+         var datos = sessionStorage.getItem("datosUser");
+         var nombreUSu = JSON.parse(datos).nombre;
+         var apellido = JSON.parse(datos).apellido;
+        $("#inicialies").text(nombreUSu.slice(0,1)+apellido.slice(0,1));
+        console.log("datos",JSON.parse(datos));
+        listTareasPorUser(JSON.parse(datos).id_user);
+       //console.log("tareas",tareas);
+       //$("#titile").text(tareas);
      }
  }
  function BorrrarSeccion(){

@@ -64,14 +64,14 @@ public class indexController {
         String rpta = opeUser.RegistraIngreso(id);
         return rpta; 
     }
-    @RequestMapping(value="/Loguear",method = RequestMethod.POST)
-   public @ResponseBody String Loguear(@RequestBody String id_user){
-        OperacionesUser opeUser = new OperacionesUser();
+    @RequestMapping(value="/Loguear",method = RequestMethod.POST, produces="application/json")
+   public @ResponseBody USER_MODEL Loguear(@RequestBody String id_user){
+        USER_MODEL usuario = null;
         String  n = id_user.replaceAll("id_user=E", "");
         int id = Integer.parseInt(n);
         //int id = Integer.parseInt(id_user);
-        String rpta = opeUser.RegistraIngreso(id);
-        return rpta; 
+        usuario = opeuser.Login(id);
+        return usuario; 
     }
       @RequestMapping(value="/registraSalida",method = RequestMethod.POST)
    public @ResponseBody String RegistraSalida(@RequestBody String id_user){
@@ -134,5 +134,8 @@ public class indexController {
         List<model_tareaUser> lsta  = opeuser.listaTareasPorUSer(id);
         return lsta; 
     }
+   
+   
+   
 }
     

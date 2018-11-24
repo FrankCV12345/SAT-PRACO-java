@@ -428,6 +428,8 @@ create procedure proc_alteraHoraTermino
 as
 UPDATE TareaUser SET HoraTermino =@HoraTermino WHERE IdTareaUser = @idTarea
 go
+proc_listaUser 
+go
 
 
  proc_alteraHoraInicio '2018-11-19 12:40:20',9
@@ -437,7 +439,7 @@ go
 
  create procedure proc_listaUser
  as
- select Usuario.IdUsuario,Usuario.Nombre from Usuario
+ select * from Usuario
  go
  create procedure proc_listTareas
  as 
@@ -455,4 +457,7 @@ create procedure Proc_Login
  @id_usu int
  as
  select IdUsuario,Nombre,Apellido,IdCargo from Usuario where Usuario.IdUsuario =  @id_usu
+go
+
+proc_listTareasPorUser 2
 go

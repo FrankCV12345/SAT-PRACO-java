@@ -33,6 +33,13 @@ public class USER_MODEL {
         this.Nombre = Nombre;
     }
 
+    public USER_MODEL(int id_user, int id_cargo, String Nombre, String Apellido) {
+        this.id_user = id_user;
+        this.id_cargo = id_cargo;
+        this.Nombre = Nombre;
+        this.Apellido = Apellido;
+    }
+
     public USER_MODEL(int id_user, int id_cargo, int id_Docimento, String Nombre, String Apellido, String Email, String Contacto, String fecha_nac, String estado_civil, String sexo, String nacionalidad, String domicilio, String nro_documento) {
         this.id_user = id_user;
         this.id_cargo = id_cargo;
