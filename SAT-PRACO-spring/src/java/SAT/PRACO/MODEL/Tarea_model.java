@@ -20,6 +20,12 @@ public class Tarea_model {
         this.estado = estado;
     }
 
+    public Tarea_model(int horas, String descripcion, String estado) {
+        this.horas = horas;
+        this.descripcion = descripcion;
+        this.estado = estado;
+    }
+
     public int getIdTarea() {
         return idTarea;
     }

@@ -118,9 +118,9 @@ go
 --===============================================
 
 --=============TABLA Reporte=================7=
-Create Table Reporte
+create Table Reporte
 (
-	IdReporte           int			NOT NULL,
+	IdReporte           int		IDENTITY(1,1)	NOT NULL,
 	FechaReporte        datetime	NOT NULL,
 	IdUsuario           int			NOT NULL,
 	TareasCumplidas     int			NOT NULL,
@@ -400,21 +400,19 @@ select * from ListTareas
 go
 
 
-CREATE PROCEDURE proc_asignaTarea
-@horarinicioE DATE,
-@horaTerminoE DATE,
+create PROCEDURE proc_asignaTarea
+
+@horarinicioE varchar(180),
+@horaTerminoE varchar(180),
 @id_user int,
 @observacion varchar(200),
 @idTarea int,
 @idSupervisor int
 as
-insert into TareaUser values(NULL,NULL,SYSDATETIME(),CONVERT(DATETIME,@horarinicioE,5),CONVERT(DATETIME,@horaTerminoE,5),@id_user,@observacion,@idTarea,@idSupervisor)
+insert into TareaUser values(NULL,NULL,SYSDATETIME(),convert (datetime,@horarinicioE),convert (datetime,@horaTerminoE),@id_user,@observacion,@idTarea,@idSupervisor)
 go
 
-proc_asignaTarea '2018-11-19 20:58:14.9887806','2018-11-19 20:58:14.9887806',2,'NADA',1,2
-GO
-select * from ListTareas
-go
+
 create procedure proc_alteraHoraInicio
 @HoraInicio datetime,
 @idTarea int
@@ -428,19 +426,18 @@ create procedure proc_alteraHoraTermino
 as
 UPDATE TareaUser SET HoraTermino =@HoraTermino WHERE IdTareaUser = @idTarea
 go
-proc_listaUser 
-go
 
 
- proc_alteraHoraInicio '2018-11-19 12:40:20',9
- go
- proc_alteraHoraTermino '2018-11-19 12:40:20',9
- go
+
+ 
 
  create procedure proc_listaUser
  as
- select * from Usuario
+ select Usuario.*, Cargo.NombreCargo
+  from Usuario JOIN Cargo on Usuario.IdCargo = Cargo.IdCargo
  go
+ proc_listaUser 
+go
  create procedure proc_listTareas
  as 
  select * from ListTareas where ListTareas.Estado = '1'
@@ -448,9 +445,10 @@ go
 create procedure proc_listTareasPorUser
 @id_user int
 as
-select * from TareaUser where TareaUser.IdUsuario = @id_user
+select TareaUser.*, ListTareas.Descripcion from TareaUser join ListTareas on ListTareas.IdTarea
+ = TareaUser.IdTarea where TareaUser.IdUsuario = @id_user
 go
-proc_listTareasPorUser 3
+proc_listTareasPorUser 1
 go
 
 create procedure Proc_Login
@@ -460,4 +458,47 @@ create procedure Proc_Login
 go
 
 proc_listTareasPorUser 2
+go
+create procedure insertaTareas
+@descrip varchar(100),
+@horas int,
+@estado char(1)
+as
+insert into ListTareas values(@descrip,@horas,@estado)
+go
+insertaTareas 'INSTALAR FOCO3',3,'1'
+GO
+CREATE PROCEDURE updateTarea
+@id int,
+@descrip varchar(100),
+@horas int,
+@estado char(1)
+as
+update ListTareas set Descripcion = @descrip,CantidadHoras = @horas ,Estado=@estado where ListTareas.IdTarea = @id
+go
+updateTarea 3,'ENTREGAR PEDIDOO',3,'1'
+go
+
+
+proc_alteraHoraInicio '2018-11-19T12:08:36',30
+ go
+ proc_alteraHoraTermino '2018-11-25T21:08:20',30
+ go
+create procedure procListaTareasParaRerporte
+@id_usu int,
+@fecha datetime
+as
+select * from TareaUser where TareaUser.FechaTarea > @fecha and TareaUser.IdUsuario = @id_usu
+go
+create procedure procRegistraReporte
+@fecha datetime,
+@id_user int,
+@tareasCum int,
+@tareasIncum int,
+@promedioTiempo decimal(5,2)
+as
+ insert into Reporte values(@fecha,@id_user,@tareasCum,@tareasIncum,@promedioTiempo)
+ go
+ 
+select * from Reporte
 go

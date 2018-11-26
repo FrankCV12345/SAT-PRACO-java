@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
        <head>
+           <script src="http://momentjs.com/downloads/moment.min.js"></script>
        <spring:url var="scripts" value="/recursos/scripts/script.js"></spring:url>
         <spring:url var="estilos" value="/recursos/Content/Estilos.css" ></spring:url>
         <spring:url var="imagenes" value="/recursos/img" ></spring:url>
@@ -14,9 +15,9 @@
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
         <spring:url var="JqueryJs" value="/Recursos/Scripts/Jquery/jquery-1.12.4.js"></spring:url>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <title>ADMIN</title>
+        <title>EMPLEADO</title>
     </head>
-    <body onload="muestraDatos()">
+    <body onload="muestraDatos(1)">
         <div id="app">
              <div class="container-SAT" >
                 <jsp:include page="BarraMenuEmpleado.jsp" />
@@ -33,107 +34,93 @@
                     			<th>MIERCOLES</th>
                     			<th>JUEVES</th>
                     			<th>VIERNES</th>
-                    			<th></th>
+                    			
                     		</tr>	
                     	</thead>
                     	<tbody>
                     		<tr> 
-                    			<td>8:00</td>
-                    			<td>PREPARAR INFORME MENSUAL</td>
-                    			<td>PREPARAR INFORME MENSUAL</td>
-                    			<td>PREPARAR INFORME MENSUAL</td>
-                    			<td>PREPARAR INFORME MENSUAL</td>
-                    			<td>PREPARAR INFORME MENSUAL</td>
-                    			<td>
-                    				<div class="iniciar">INICIAR</div>
-                    					<div class="espacio"></div>
- 	                   				<div class="terminar">TERMINAR</div>
-                    			</td>	
+                    			<td >8:00</td>
+                                        <td data-id="" class="lunes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)" ></td>
+                    			<td data-id="" class="martes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="miercoles" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="jueves" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                                        <td data-id="" class="viernes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    				
                     		</tr>
                     		<tr> 
                     			<td>9:00</td>
-                    			<td>PREPARAR INFORME MENSUAL</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>
-                    				<div class="iniciar">INICIAR</div>
-                    					<div class="espacio"></div>
- 	                   				<div class="terminar">TERMINAR</div>
-                    			</td>	
+                                        <td data-id="" class="lunes" ondblclick="TerminarTarea(this)"   onclick="IniciarTerminar(this)"  ></td>
+                    			<td data-id="" class="martes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="miercoles" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="jueves" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                                        <td data-id="" class="viernes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    				
                     		</tr>
                     		<tr> 
                     			<td>10:00</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>
-                    				<div class="iniciar">INICIAR</div>
-                    					<div class="espacio"></div>
- 	                   				<div class="terminar">TERMINAR</div>
-                    			</td>	
+                    			<td data-id="" class="lunes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td  data-id="" class="martes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="miercoles" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="jueves" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                                        <td data-id="" class="viernes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    				
                     		</tr>
                     		<tr> 
                     			<td>11:00</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>
-                    				<div class="iniciar">INICIAR</div>
-                    					<div class="espacio"></div>
- 	                   				<div class="terminar">TERMINAR</div>
-                    			</td>	
+                    			<td data-id="" class="lunes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="martes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="miercoles" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="jueves" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                                        <td  data-id="" class="viernes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    				
                     		</tr>
                     		<tr> 
                     			<td>12:00</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>
-                    				<div class="iniciar">INICIAR</div>
-                    					<div class="espacio"></div>
- 	                   				<div class="terminar">TERMINAR</div>
-                    			</td>	
+                    			<td data-id="" class="lunes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="martes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="miercoles" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="jueves" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                                        <td data-id="" class="viernes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    				
                     		</tr>
                     		<tr> 
                     			<td>13:00</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>
-                    				<div class="iniciar">INICIAR</div>
-                    					<div class="espacio"></div>
- 	                   				<div class="terminar">TERMINAR</div>
-                    			</td>	
+                    			<td data-id="" class="lunes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="martes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="miercoles" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="jueves" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                                        <td data-id="" class="viernes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    				
                     		</tr>
                     		<tr> 
                     			<td>14:00</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>b</td>
-                    			<td>
-                    				<div class="iniciar">INICIAR</div>
-                    					<div class="espacio"></div>
- 	                   				<div class="terminar">TERMINAR</div>
-                    			</td>	
+                    			<td data-id="" class="lunes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="martes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="miercoles" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="jueves" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                                        <td data-id="" class="viernes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    				
+                    		</tr>
+                                <tr> 
+                    			<td>15:00</td>
+                    			<td data-id="" class="lunes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="martes"  ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td  data-id="" class="miercoles" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td  data-id="" class="jueves" ondblclick="TerminarTarea(this)"  onclick="IniciarTerminar(this)"></td>
+                                        <td data-id="" class="viernes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			
+                    		</tr>
+                                <tr> 
+                    			<td>16:00</td>
+                    			<td data-id="" class="lunes" ondblclick="TerminarTarea(this)"  onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="martes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td  data-id="" class="miercoles" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="jueves" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			<td data-id="" class="viernes" ondblclick="TerminarTarea(this)" onclick="IniciarTerminar(this)"></td>
+                    			
                     		</tr>
                     	</tbody>
-                    	<tfoot>
-                    		<tr>
-                    			<td colspan="7">FOOTER</td>
-                    		</tr>
-                    	</tfoot>
+                    
                     </table>
 
                 </div>

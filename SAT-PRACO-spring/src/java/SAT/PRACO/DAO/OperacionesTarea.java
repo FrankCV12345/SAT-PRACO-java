@@ -37,6 +37,26 @@ public class OperacionesTarea implements IOperacionesTarea {
         }
           return listTareas;
     }
+
+    @Override
+    public String Addtarea(Tarea_model tarea) {
+         bdConnection objCon = new bdConnection();
+        Connection con = objCon.EstablecerConexion();
+        String rpta ="";
+        try{
+            PreparedStatement pst = con.prepareStatement("{call insertaTareas(?,?,?)}");
+            pst.setString(1, tarea.getDescripcion());
+            pst.setInt(2,tarea.getHoras());
+            pst.setString(3, tarea.getEstado());
+            pst.execute();
+            rpta = pst.getUpdateCount() > 0 ? "REGISTRADO CORRECTAMENTE" : "NO  SE PUDO REGISTRAR"; 
+        }catch(SQLException e){
+            rpta =""+e.getMessage();
+        }
+        return rpta;
+    }
+
+   
   
     
 }

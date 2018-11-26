@@ -1,3 +1,4 @@
+var puestos =[];
 function MostrarHora(){
     var hora = new Date();
     var meridiano = "AM";
@@ -23,6 +24,7 @@ function MostrarModal( frm){
                         });
                          $.get("/SAT-PRACO-spring/listacargos",
                         function(dataa){
+                            
                             for(w=0 ; w < dataa.length;w++){
                                 $("#list-cargo").append("<option value='"+dataa[w].id_cargo+"'>"+dataa[w].nombre_cargo+"</option>")  ;
                                 //<option value='"+dataa[w].id_cargo+"'>"+dataa[w].nombre_cargo+"</option>
@@ -107,8 +109,8 @@ function formato(texto){
      var idTarea = $("#lstTreas").val();
      var idSupervisor = 1;
      var idUsuario = $("#lstUsers").val();
-     var fechaInicioE =formato($("#fechaInicioE").val());
-     var fechaFinE = formato($("#fechaFinE").val());
+     var fechaInicioE =$("#fechaInicioE").val();
+     var fechaFinE = $("#fechaFinE").val();
      var obvs = $("#Descripcion").val();
      //alert(fechaInicioE+"   "+fechaFinE);
       $.ajax({
@@ -119,8 +121,8 @@ function formato(texto){
             idtarealst :idTarea,
             idsupervisor:idSupervisor,
             idUser:idUsuario,
-            HoraInicioE:fechaInicioE,
-            HoraTerminoE:fechaFinE,
+            HoraInicioE:fechaInicioE+":00",
+            HoraTerminoE:fechaFinE+":00",
             observacion:obvs
             }),
           success: function(data){
@@ -141,6 +143,89 @@ function formato(texto){
         data: {id:idUsuario},
         success: function(data){
               console.log("tareas",data);
+              var tamaño = data.length;
+              for(i = 0 ; i < tamaño ; i++){
+                  var fecha1 = moment(data[i].horaInicioE);
+                  var fecha2 = moment(data[i].horaTerminoE);
+                   var horas  = fecha2.diff(fecha1, 'hours');
+                   var celdasLunes = document.getElementsByClassName("lunes");
+                   var celdasMartes = document.getElementsByClassName("martes");
+                   var celdasMiercoles = document.getElementsByClassName("miercoles");
+                   var celdasJueves = document.getElementsByClassName("jueves");
+                   var celdasviernes = document.getElementsByClassName("viernes");
+                   var fecha = new Date(fecha1);
+                    var dia = fecha.getUTCDay();
+                    var hora = fecha.getHours();
+                    var posicelda  ;
+                   switch(hora){
+                            case 8:
+                               posicelda = 0;
+                                break;
+                            case 9:
+                                posicelda = 1;
+                                break;
+                            case 10:
+                               posicelda = 2;
+                                break;
+                            case 11:
+                                posicelda = 3;
+                                break;
+                            case 12:
+                               posicelda = 4;
+                                break;
+                            case 13:
+                                posicelda = 5;
+                                break;
+                            case 14:
+                               posicelda = 6;
+                                break;
+                            case 15:
+                                posicelda = 7;
+                                break;
+                            case 16:
+                                posicelda = 8;
+                                break;
+                       
+                   }
+                   for(w = 0; w < horas; w++){
+                       posicelda = posicelda + 1;
+                       switch (dia){
+                            case 0:
+                               alert("algo salio mal domingo");
+                                break;
+                            case 1:
+                                celdasLunes[(posicelda-1)].innerHTML =data[i].observacion;
+                                celdasLunes[(posicelda-1)].setAttribute("data-id",data[i].id_tarea);
+                                break;
+                            case 2:
+                                celdasMartes[(posicelda-1)].innerHTML =data[i].observacion;
+                                celdasMartes[(posicelda-1)].setAttribute("data-id",data[i].id_tarea);
+                                break;
+                            case 3:
+                                celdasMiercoles[(posicelda-1)].innerHTML =data[i].observacion;
+                                celdasMiercoles[(posicelda-1)].setAttribute("data-id",data[i].id_tarea);
+                                break;
+                            case 4:
+                                celdasJueves[(posicelda-1)].innerHTML =data[i].observacion;
+                                celdasJueves[(posicelda-1)].setAttribute("data-id",data[i].id_tarea);
+                                break;
+                            case 5:
+                                celdasviernes[(posicelda-1)].innerHTML =data[i].observacion;
+                                celdasviernes[(posicelda-1)].setAttribute("data-id",data[i].id_tarea);
+                                break;
+                            case 6:
+                                alert("algo salio mal savado");
+                       }
+                       
+                       //alert(w);
+                   }
+                    //alert(horas);
+               // alert(celdas.length);
+                  // $(".lunes").css("border","solid 1px red");
+                  
+              }
+              
+              console.log(fecha2.diff(fecha1, 'hours'), ' horas de diferencia');
           },
         error:function(){
               console.log("tareas","error");
@@ -152,22 +237,29 @@ function formato(texto){
  function Login(){
      var nombre = $("#idusu").val();
      if (typeof(Storage) !== "undefined") {
-        
-        
          $.ajax({
         type: "post",
         url: "/SAT-PRACO-spring/Loguear",
-        //contentType: "application/json",
         data: {id_user:nombre},
         success: function(data){
               //alert(data);
               if(data === ""){
                   //location.href  ="http://localhost:8090/SAT-PRACO-spring/empleado";
-                  alert("usuario incorrecto")
+                  alert("usuario incorrecto");
               }else{
-                  location.href  ="http://localhost:8090/SAT-PRACO-spring/empleado";
-                    sessionStorage.setItem("datosUser",JSON.stringify(data));
-                    location.href  ="http://localhost:8090/SAT-PRACO-spring/empleado";
+                  sessionStorage.setItem("datosUser",JSON.stringify(data));
+                  if(data.id_cargo === 1){
+                      location.href  ="http://localhost:8090/SAT-PRACO-spring/empleado";
+                  }else if(data.id_cargo === 3){
+                      location.href  ="http://localhost:8090/SAT-PRACO-spring/admin";
+                  }else if(data.id_cargo === 2){
+                      location.href  ="http://localhost:8090/SAT-PRACO-spring/supervisor";
+                  }else{
+                      alert("algo salio mal");
+                  }
+                  
+                    
+                    
               }
           },
         error:function(){
@@ -182,18 +274,27 @@ function formato(texto){
         alert("SU NAVEGADOR NO SOPORTA LOCALSTORAGE");
     }
  }
- function muestraDatos(){
+ function muestraDatos(validador){
      
      
      if(sessionStorage.getItem("datosUser") === null){
         location.href  ="http://localhost:8090/SAT-PRACO-spring/login";
      }else{
-         var datos = sessionStorage.getItem("datosUser");
+          var datos = sessionStorage.getItem("datosUser");
+         if(JSON.parse(datos).id_cargo === validador){
          var nombreUSu = JSON.parse(datos).nombre;
          var apellido = JSON.parse(datos).apellido;
-        $("#inicialies").text(nombreUSu.slice(0,1)+apellido.slice(0,1));
+         
+        $("#inicialies").text(nombreUSu.slice(0,1)+"."+apellido.slice(0,1));
         console.log("datos",JSON.parse(datos));
         listTareasPorUser(JSON.parse(datos).id_user);
+        ListaUserParaAdmin();
+         }else{
+             alert("USted no tiene atuotizacion para esta aqui");
+             location.href  ="http://localhost:8090/SAT-PRACO-spring/login";
+             sessionStorage.clear();
+         }
+         
        //console.log("tareas",tareas);
        //$("#titile").text(tareas);
      }
@@ -202,4 +303,123 @@ function formato(texto){
      sessionStorage.clear();
      location.href  ="http://localhost:8090/SAT-PRACO-spring/login";
  }
+ function ListaUserParaAdmin(){
+     
+      $.get("/SAT-PRACO-spring/listausers",
+                        function(data){
+                            for(i=0; i < data.length;i++){
+                                $(".cont-list-users").append("<div class='cont-perfil-user' ><div class='cont-img-user'><img src='recursos/img/avatar.png' class='img-user'></div><div class='datos-user'><label> Nombre :</label> <span>"+data[i].nombre+"</span><br><label> Puesto :</label> <span>"+data[i].id_cargo+"</span><br><span onclick='MostrarModal('div-sueldo')'> ver sueldo</span>-<span onclick='MostrarModal('div-datos-user')'> ver datos</span></div></div>") ;
+                            
+                            }
+                             console.log("users",data);
+                        });
+ }
+ 
+ 
+  function RegistranNewTarea(){
+     var desc = $("#descriptarea").val();
+     var estado = $("#lstestado").val();
+     var horas = $("#CantHoras").val();
+     //alert(fechaInicioE+"   "+fechaFinE);
+      $.ajax({
+        type: "post",
+        url: "/SAT-PRACO-spring/registraNeuevatarea",
+        contentType: "application/json",
+        data: JSON.stringify({
+            horas :horas,
+            descripcion:desc,
+            estado:estado
+            }),
+          success: function(data){
+              alert(data);
+          },error:function(){
+              alert("no funca");
+          }
+        });
+ }
+ 
+ 
+ function IniciarTerminar(elemnto){
+        var d = new Date();
+        var month = d.getMonth()+1;
+        var day = d.getDate();
+        var year = d.getFullYear();
+        var hora = d.getHours();
+        var minutos = d.getMinutes();
+        var segundos = d.getSeconds();
+        if(minutos<10){
+            minutos ="0"+minutos;
+        }
+         if(segundos<10){
+            segundos ="0"+segundos;
+        }
+        var fecha = year+"-"+month+"-"+day+"T"+hora+":"+minutos+":"+segundos;
+        var ele = elemnto.getAttribute("data-id");
+          $.ajax({
+        type: "post",
+        url: "/SAT-PRACO-spring/registraInioTarea",
+        contentType: "application/json",
+        data:JSON.stringify( {
+            HoraInicio :fecha,
+            id_tarea:ele
+            }),
+          success: function(data){
+               alert(data);
+          },error:function(){
+              alert("no funca");
+          }
+        });
+    
+ }
+ 
+ function TerminarTarea(elemnto){
+        var d = new Date();
+        var month = d.getMonth()+1;
+        var day = d.getDate();
+        var year = d.getFullYear();
+        var hora = d.getHours();
+        var minutos = d.getMinutes();
+        var segundos = d.getSeconds();
+        if(minutos<10){
+            minutos ="0"+minutos;
+        }
+         if(segundos<10){
+            segundos ="0"+segundos;
+        }
+        var fecha = year+"-"+month+"-"+day+"T"+hora+":"+minutos+":"+segundos;
+        var ele = elemnto.getAttribute("data-id");
+          $.ajax({
+        type: "post",
+        url: "/SAT-PRACO-spring/registraFinTarea",
+        contentType: "application/json",
+        data:JSON.stringify( {
+            HoraTermino :fecha,
+            id_tarea:ele
+            }),
+          success: function(data){
+              alert(data);
+          },error:function(){
+              alert("no funca");
+          }
+        });
+    }
+    function listaTareasParaReporte(){
+        var idusu = 1;
+        var fecha = "2018-11-25T00:00:00";
+          $.ajax({
+        type: "post",
+        url: "/SAT-PRACO-spring/listaTareasPorUser",
+        contentType: "application/json",
+        data:JSON.stringify( {
+            idUser :idusu,
+            Fechatarea:fecha
+            }),
+          success: function(data){
+              console.log("data",data);
+          },error:function(){
+              alert("no funca");
+          }
+        });
+        
+    }
  

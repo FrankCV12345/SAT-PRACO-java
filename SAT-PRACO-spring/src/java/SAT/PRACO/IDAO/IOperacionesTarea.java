@@ -13,5 +13,6 @@ import java.util.List;
  */
 public interface IOperacionesTarea {
     public List<Tarea_model> listaTareas();
+    public String Addtarea(Tarea_model tarea);
     
 }

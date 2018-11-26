@@ -6,6 +6,7 @@
 package SAT.PRACO.DAO;
 import SAT.PRACO.bd.bdConnection;
 import SAT.PRACO.IDAO.IOperacionesUser;
+import SAT.PRACO.MODEL.ReporteModel;
 import SAT.PRACO.MODEL.USER_MODEL;
 import SAT.PRACO.MODEL.model_tareaUser;
 import java.sql.Connection;
@@ -147,7 +148,11 @@ public class OperacionesUser implements IOperacionesUser  {
            
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
-                listaUSer.add(new USER_MODEL(rs.getInt(1),rs.getString(2)));
+                /*listaUSer.add(new USER_MODEL(rs.getInt(1),rs.getString(2)
+                ));*/
+                 listaUSer.add(new USER_MODEL(rs.getInt(1),rs.getInt(6),rs.getInt(12),rs.getString(2),rs.getString(3),
+                rs.getString(4),rs.getString(5),rs.getString(11),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(13),rs.getString(14)
+                ));
                 
             }
             
@@ -179,7 +184,8 @@ public class OperacionesUser implements IOperacionesUser  {
                          rs.getString(4),
                          rs.getString(5)
                          ,rs.getString(6),
-                          rs.getString(8)
+                          rs.getString(8),
+                          rs.getString(11)
                         ));
             }
         }catch(SQLException e){
@@ -206,6 +212,96 @@ public class OperacionesUser implements IOperacionesUser  {
             rpta = ""+e.getMessage();
         }
        return user;
+    }
+
+    @Override
+    public String InicioTarea(String fechainicio, int idtarea) {
+        bdConnection objCon = new bdConnection();
+        Connection con = objCon.EstablecerConexion();
+        String rpta ="";
+        try{
+         PreparedStatement pst = con.prepareStatement("{ call proc_alteraHoraInicio (?,?)}");
+            pst.setString(1, fechainicio);
+            pst.setInt(2, idtarea);
+             pst.execute();
+             rpta = pst.getUpdateCount() > 0 ? "INICIO REGISTRADO" : "NO SE PUDO REGISTRAR INICIO";
+        }catch(SQLException e){
+         rpta = ""+e.getMessage();
+        }
+        return rpta;
+    }
+
+    @Override
+    public String FinTarea(String fechafin, int idtarea) {
+        bdConnection objCon = new bdConnection();
+        Connection con = objCon.EstablecerConexion();
+        String rpta ="";
+        try{
+         PreparedStatement pst = con.prepareStatement("{ call proc_alteraHoraTermino (?,?)}");
+            pst.setString(1, fechafin);
+            pst.setInt(2, idtarea);
+             pst.execute();
+             rpta = pst.getUpdateCount() > 0 ? "FIN REGISTRADO" : "NO SE PUDO REGISTRAR FIN";
+        }catch(SQLException e){
+         rpta = ""+e.getMessage();
+        }
+        return rpta;
+    }
+
+    @Override
+    public List<model_tareaUser> listatareasPorFEchayuser(model_tareaUser tarea) {
+         bdConnection objCon = new bdConnection();
+        Connection con = objCon.EstablecerConexion();
+        String rpta ="";
+        List<model_tareaUser> tareas = null;
+        try{
+            PreparedStatement pst = con.prepareStatement("{ call procListaTareasParaRerporte (?,?)}");
+           
+            pst.setInt(1, tarea.getIdUser());
+            pst.setString(2, tarea.getFechatarea());
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                tareas.add( new model_tareaUser(
+                
+                        rs.getInt(1),
+                        rs.getInt(7),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getString(2)
+                        ,rs.getString(3),
+                         rs.getString(4),
+                         rs.getString(5)
+                         ,rs.getString(6),
+                          rs.getString(8),
+                          rs.getString(11)
+                
+                ));
+            }
+            
+        }catch(SQLException e){
+            rpta = ""+e.getMessage();
+        }
+       return tareas;
+    }
+
+    @Override
+    public String RegistraReporte(ReporteModel repore) {
+        bdConnection objCon = new bdConnection();
+        Connection con = objCon.EstablecerConexion();
+        String rpta ="";
+        try{
+         PreparedStatement pst = con.prepareStatement("{ call procRegistraReporte (?,?,?,?,?)}");
+            pst.setString(1, repore.getFechaReporte());
+            pst.setInt(2, repore.getIdUsu());
+            pst.setInt(3, repore.getTareasCumplidas());
+            pst.setInt(4, repore.getTareasIncumplidas());
+            pst.setDouble(5, repore.getPromedioTiempo());
+             pst.execute();
+             rpta = pst.getUpdateCount() > 0 ? " REGISTRADO" : "NO SE PUDO REGISTRAR ";
+        }catch(SQLException e){
+         rpta = ""+e.getMessage();
+        }
+        return rpta;
     }
 
  

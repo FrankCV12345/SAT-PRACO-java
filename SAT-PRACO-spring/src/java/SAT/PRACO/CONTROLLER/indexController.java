@@ -90,10 +90,17 @@ public class indexController {
         String rpta =opeUser.Registrouser(usuario);
         return rpta; 
     }
+   
     @RequestMapping(value="/registratarea",method = RequestMethod.POST)
    public @ResponseBody String RegistraTarea(@RequestBody String objJson){
         model_tareaUser tarea  = new Gson().fromJson(objJson, model_tareaUser.class);
         String rpta =opeuser.Registarea(tarea);
+        return rpta; 
+    }
+    @RequestMapping(value="/registraNeuevatarea",method = RequestMethod.POST)
+   public @ResponseBody String RegistraNewTarea(@RequestBody String objJson){
+        Tarea_model tarea  = new  Gson().fromJson(objJson, Tarea_model.class);
+        String rpta =operTarea.Addtarea(tarea);
         return rpta; 
     }
    
@@ -135,7 +142,27 @@ public class indexController {
         return lsta; 
     }
    
+       @RequestMapping(value="/registraInioTarea",method = RequestMethod.POST)
+   public @ResponseBody String RegistraInicioTarea(@RequestBody String objJson){
+        
+       model_tareaUser tarea = new Gson().fromJson(objJson, model_tareaUser.class);
+        String rpta = opeuser.InicioTarea(tarea.getHoraInicio(),tarea.getId_tarea());
+        return rpta; 
+    }
    
+         @RequestMapping(value="/registraFinTarea",method = RequestMethod.POST)
+   public @ResponseBody String RegistraFinTarea(@RequestBody String objJson){
+       model_tareaUser tarea = new Gson().fromJson(objJson, model_tareaUser.class);
+        String rpta = opeuser.FinTarea(tarea.getHoraTermino(),tarea.getId_tarea());
+        return rpta; 
+    }
+  
+       @RequestMapping(value="/listaTareasPorUser",method = RequestMethod.POST, produces="application/json")
+   public @ResponseBody List<model_tareaUser>  listaTareasParaReporte(@RequestBody String objJson){
+        model_tareaUser list = new Gson().fromJson(objJson,model_tareaUser.class);
+        List<model_tareaUser> lsta  = opeuser.listatareasPorFEchayuser(list);
+        return lsta; 
+    }
    
 }
     

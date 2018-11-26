@@ -16,12 +16,25 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <title>ADMIN</title>
     </head>
-    <body>
+    <body onload="muestraDatos(3)">
         <div id="app">
             <div class="container-SAT" >
                 <jsp:include page="BarraMenu.jsp" />
                 <div class="contenido">
-                    
+                         <div class="cont-list-users">
+                            <div class="cont-perfil-user" >
+                                <div class="cont-img-user">
+                                        <img src="recursos/img/avatar.png" class="img-user"> 
+                                </div>
+                                    <div class="datos-user">
+                                        <label> Nombre :</label> <span>josefina rosas</span><br>
+                                        <label> Puesto :</label> <span>Asistente de gerencia</span>
+                                        <br>
+                                        <span onclick="MostrarModal('div-sueldo')"> ver sueldo</span>-                                        <span onclick="MostrarModal('div-datos-user')"> ver datos</span>
+                                    </div>
+                            </div>
+                        </div>
+
                 </div>
             </div>
              <div class="modal-a">
@@ -129,6 +142,33 @@
                             <input type="button" name="" value="X" onclick="MostrarModal('frm-asigna-tarea')">
                         </form>
                     </div>
+                    <!--REGISTRO DE TAREA-->
+                    <div class="frm-registra-tarea">
+                        <form id="frm-registra-tarea">
+                                    <div class="form-group">
+                                        <label for="example-datetime-local-input" class="col-2 col-form-label">DESCRIPCION TAREA</label>
+                                          <div class="col-10">
+                                            <input class="form-control" type="text" id="descriptarea">
+                                          </div>
+                                         <label for="example-datetime-local-input" class="col-2 col-form-label">CANTIDAD HORAS</label>
+                                          <div class="col-10">
+                                            <input class="form-control" type="number" id="CantHoras">
+                                          </div>
+                                           <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                  <label class="input-group-text" for="">ESTADO</label>
+                                                </div>
+                                                <select class="custom-select" id="lstestado">
+                                                  <option selected value="1">ACTIVO</option>
+                                                  <option  value="0">DESCATIVADO</option>
+                                                </select>
+                                            </div>
+                                          
+                                  </div>
+                            <input type="button" name="" value="GUARDAR" onclick="RegistranNewTarea()">
+                            <input type="button" name="" value="X" onclick="MostrarModal('frm-registra-tarea')">
+                        </form>
+                    </div>
                       <!-- INICIO DE EL ELEMENTO DIV CALCULA  SUELDO-->
                        <div class="div-sueldo">
                             <div class="conte-sueldo">
@@ -175,9 +215,11 @@
                                 <input type="button" name="" value="GUARDAR">
                                 <input type="button" name="" value="X" onclick="MostrarModal('div-datos-user')">
                             </div>
-                    </div>
+                         </div>
                     <!-- FIN DE EL ELEMENTO DIV  DATOS USER--->
-                </div>
-        </div>
+                        </div>
+                    </div>
+                
+    </div>
     </body>
 </html>

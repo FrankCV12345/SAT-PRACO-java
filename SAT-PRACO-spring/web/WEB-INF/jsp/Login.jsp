@@ -14,7 +14,7 @@
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
         <spring:url var="JqueryJs" value="/Recursos/Scripts/Jquery/jquery-1.12.4.js"></spring:url>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <title>ADMIN</title>
+        <title>LOGIN</title>
     </head>
     <body>
         <div id="app">

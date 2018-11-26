@@ -11,7 +11,26 @@ package SAT.PRACO.MODEL;
  */
 public class model_tareaUser {
     private int id_tarea,idUser,idtarealst,idsupervisor;
-    private String HoraInicio,HoraTermino,Fechatarea,HoraInicioE,HoraTerminoE,observacion;
+    private String HoraInicio,HoraTermino,Fechatarea,HoraInicioE,HoraTerminoE,observacion,nombreTarea;
+
+    public model_tareaUser(int id_tarea, String HoraInicio) {
+        this.id_tarea = id_tarea;
+        this.HoraInicio = HoraInicio;
+    }
+
+    public model_tareaUser(int id_tarea, int idUser, int idtarealst, int idsupervisor, String HoraInicio, String HoraTermino, String Fechatarea, String HoraInicioE, String HoraTerminoE, String observacion, String nombreTarea) {
+        this.id_tarea = id_tarea;
+        this.idUser = idUser;
+        this.idtarealst = idtarealst;
+        this.idsupervisor = idsupervisor;
+        this.HoraInicio = HoraInicio;
+        this.HoraTermino = HoraTermino;
+        this.Fechatarea = Fechatarea;
+        this.HoraInicioE = HoraInicioE;
+        this.HoraTerminoE = HoraTerminoE;
+        this.observacion = observacion;
+        this.nombreTarea = nombreTarea;
+    }
 
     public model_tareaUser() {
     }
