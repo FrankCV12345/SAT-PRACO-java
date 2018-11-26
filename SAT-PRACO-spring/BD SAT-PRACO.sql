@@ -500,5 +500,11 @@ as
  insert into Reporte values(@fecha,@id_user,@tareasCum,@tareasIncum,@promedioTiempo)
  go
  
-select * from Reporte
+procListaTareasParaRerporte 1 ,'2018-11-25T00:00:00'
+go
+procListaTareasParaRerporte 1,'2018-11-25T00:00:00'
+go
+select * from usuario
+go
+update usuario set IdCargo = 2 where IdUsuario =3
 go

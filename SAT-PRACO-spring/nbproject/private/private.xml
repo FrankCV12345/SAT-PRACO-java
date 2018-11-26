@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-java/SAT-PRACO-spring/web/WEB-INF/jsp/EmpleadoView.jsp</file>
-            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/DAO/OperacionesUser.java</file>
-            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/MODEL/USER_MODEL.java</file>
-            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/CONTROLLER/indexController.java</file>
-            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-java/SAT-PRACO-spring/web/WEB-INF/jsp/adminview.jsp</file>
-            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-java/SAT-PRACO-spring/web/recursos/scripts/script.js</file>
-            <file>file:/C:/Users/SARA/Desktop/PROYECTOS%20IDAT/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/MODEL/model_tareaUser.java</file>
+            <file>file:/C:/Users/SARA/Desktop/PROYECTOS-IDAT/SAT-PRACO-java/SAT-PRACO-spring/web/WEB-INF/dispatcher-servlet.xml</file>
+            <file>file:/C:/Users/SARA/Desktop/PROYECTOS-IDAT/SAT-PRACO-java/SAT-PRACO-spring/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/SARA/Desktop/PROYECTOS-IDAT/SAT-PRACO-java/SAT-PRACO-spring/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/SARA/Desktop/PROYECTOS-IDAT/SAT-PRACO-java/SAT-PRACO-spring/src/java/SAT/PRACO/CONTROLLER/indexController.java</file>
         </group>
     </open-files>
 </project-private>

@@ -253,7 +253,7 @@ public class OperacionesUser implements IOperacionesUser  {
          bdConnection objCon = new bdConnection();
         Connection con = objCon.EstablecerConexion();
         String rpta ="";
-        List<model_tareaUser> tareas = null;
+        List<model_tareaUser> lstareas = new ArrayList<>();
         try{
             PreparedStatement pst = con.prepareStatement("{ call procListaTareasParaRerporte (?,?)}");
            
@@ -261,8 +261,7 @@ public class OperacionesUser implements IOperacionesUser  {
             pst.setString(2, tarea.getFechatarea());
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
-                tareas.add( new model_tareaUser(
-                
+                lstareas.add( new model_tareaUser(
                         rs.getInt(1),
                         rs.getInt(7),
                         rs.getInt(9),
@@ -272,16 +271,16 @@ public class OperacionesUser implements IOperacionesUser  {
                          rs.getString(4),
                          rs.getString(5)
                          ,rs.getString(6),
-                          rs.getString(8),
-                          rs.getString(11)
+                          rs.getString(8)
                 
                 ));
+                //lstareas.add( new model_tareaUser() );
             }
             
         }catch(SQLException e){
             rpta = ""+e.getMessage();
         }
-       return tareas;
+       return lstareas;
     }
 
     @Override

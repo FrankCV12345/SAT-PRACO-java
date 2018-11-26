@@ -140,7 +140,7 @@ html,body{
     height: 100%;
     left: 90px;
     position: relative;
-    overflow: autos;
+    overflow: auto;
 }
 .cont-list-users{
     width: 98%;
@@ -178,7 +178,7 @@ html,body{
     z-index: 200;
     display: none;
 }
-.frm-registra-user , .frm-asigna-tarea,.div-sueldo,.div-datos-user,.frm-registra-tarea{
+.frm-registra-user , .frm-asigna-tarea,.div-sueldo,.div-datos-user,.frm-registra-tarea,.frm-registra-reporte{
     width: 700px;
     height: 700px;
     background: #FFFEFE;
@@ -199,7 +199,7 @@ input[type=button] {
     box-sizing: border-box;
     background-color: #4CAF50;
 }
-#frm-regis-user,#frm-regis-tarea,#frm-registra-tarea{
+#frm-regis-user,#frm-regis-tarea,#frm-registra-tarea,#frm-regis-reporte{
     padding-top: 25px;
     width: 80%;
     margin: 0 auto;
@@ -260,6 +260,15 @@ input[type=button] {
     height: 400px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
- td tr:hover{
-    cursor: pointer;
+.lstareasReporte{
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+    overflow: auto;
+    text-align: center;
+    font-size: 11px;
+}
+#tareas tr td{
+    border: solid 0.5px #575757;
+    padding: 4px;
 }

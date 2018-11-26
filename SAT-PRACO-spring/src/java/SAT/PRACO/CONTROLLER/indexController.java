@@ -19,6 +19,7 @@ import SAT.PRACO.MODEL.CargoModel;
 import SAT.PRACO.MODEL.USER_MODEL;
 import SAT.PRACO.MODEL.model_tareaUser;
 import SAT.PRACO.DAO.OperacionesTipoDoc;
+import SAT.PRACO.MODEL.ReporteModel;
 import com.google.gson.Gson;
 import java.util.List;
 
@@ -44,6 +45,10 @@ public class indexController {
     public String ViewAdmin(){
     return "adminview";
     }
+    @RequestMapping(value="/Supervisor",method= RequestMethod.GET)
+    public String ViewSupervisor(){
+    return "SuepervisorView";
+    }
     @RequestMapping(value="/empleado",method= RequestMethod.GET)
     public String ViewEmpleado(){
     return "EmpleadoView";
@@ -52,9 +57,7 @@ public class indexController {
     public String ViewLogin(){
     return "Login";
     }
-   /* public @ResponseBody String RegistraEntrada(){
-        return "ADASDSD"; 
-    }*/
+   
    @RequestMapping(value="/registraIngreso",method = RequestMethod.POST)
    public @ResponseBody String RegistraEntrada(@RequestBody String id_user){
         OperacionesUser opeUser = new OperacionesUser();
@@ -127,13 +130,7 @@ public class indexController {
         return listaUser; 
     }
   
-   /* @RequestMapping(value="/listaTareasPorUser",method = RequestMethod.GET)
-   public @ResponseBody String listaTareasPorUser(@RequestBody String id){
-       //USER_MODEL usuario  = new Gson().fromJson(objJson, USER_MODEL.class);
-       //int id = Integer.parseInt(idu);
-        //List<model_tareaUser> listaUser = opeuser.listaTareasPorUSer(3);
-        return id; 
-    }*/
+ 
       @RequestMapping(value="/listaTareasPorUser",method = RequestMethod.POST, produces="application/json")
    public @ResponseBody List<model_tareaUser>  listaTareasPorUser(@RequestBody String id_user){
           String  n = id_user.replaceAll("id=", "");
@@ -157,11 +154,18 @@ public class indexController {
         return rpta; 
     }
   
-       @RequestMapping(value="/listaTareasPorUser",method = RequestMethod.POST, produces="application/json")
+       @RequestMapping(value="/listaTareasParaReporte",method = RequestMethod.POST, produces="application/json")
    public @ResponseBody List<model_tareaUser>  listaTareasParaReporte(@RequestBody String objJson){
-        model_tareaUser list = new Gson().fromJson(objJson,model_tareaUser.class);
-        List<model_tareaUser> lsta  = opeuser.listatareasPorFEchayuser(list);
+        model_tareaUser tarea = new Gson().fromJson(objJson,model_tareaUser.class);
+        List<model_tareaUser> lsta  = opeuser.listatareasPorFEchayuser(tarea);
         return lsta; 
+    }
+   
+         @RequestMapping(value="/RegistraReporte",method = RequestMethod.POST, produces="application/json")
+   public @ResponseBody String RegistraReporte(@RequestBody String objJson){
+        ReporteModel reporte = new Gson().fromJson(objJson,ReporteModel.class);
+        String rpta  = opeuser.RegistraReporte(reporte);
+        return rpta; 
     }
    
 }

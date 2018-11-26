@@ -44,6 +44,14 @@ function MostrarModal( frm){
                                 $("#lstTreas").append("<option value='"+data[i].idTarea+"'>"+data[i].descripcion+"</option>")  ;
                             }
                         });
+                    }else if(frm === "frm-registra-reporte"){
+                        $.get("/SAT-PRACO-spring/listausers",
+                        function(data){
+                            for(i=0; i < data.length;i++){
+                                $("#lstempleados").append("<option value='"+data[i].id_user+"'>"+data[i].nombre+"</option>")  ;
+                            }
+                        });
+                       
                     }
                     
 			modal[0].style.display = "block";
@@ -249,11 +257,11 @@ function formato(texto){
               }else{
                   sessionStorage.setItem("datosUser",JSON.stringify(data));
                   if(data.id_cargo === 1){
-                      location.href  ="http://localhost:8090/SAT-PRACO-spring/empleado";
+                      location.href  ="http://localhost:8080/SAT-PRACO-spring/empleado";
                   }else if(data.id_cargo === 3){
-                      location.href  ="http://localhost:8090/SAT-PRACO-spring/admin";
+                      location.href  ="http://localhost:8080/SAT-PRACO-spring/admin";
                   }else if(data.id_cargo === 2){
-                      location.href  ="http://localhost:8090/SAT-PRACO-spring/supervisor";
+                      location.href  ="http://localhost:8080/SAT-PRACO-spring/Supervisor";
                   }else{
                       alert("algo salio mal");
                   }
@@ -278,7 +286,7 @@ function formato(texto){
      
      
      if(sessionStorage.getItem("datosUser") === null){
-        location.href  ="http://localhost:8090/SAT-PRACO-spring/login";
+        location.href  ="http://localhost:8080/SAT-PRACO-spring/login";
      }else{
           var datos = sessionStorage.getItem("datosUser");
          if(JSON.parse(datos).id_cargo === validador){
@@ -291,7 +299,7 @@ function formato(texto){
         ListaUserParaAdmin();
          }else{
              alert("USted no tiene atuotizacion para esta aqui");
-             location.href  ="http://localhost:8090/SAT-PRACO-spring/login";
+             location.href  ="http://localhost:8080/SAT-PRACO-spring/login";
              sessionStorage.clear();
          }
          
@@ -301,7 +309,7 @@ function formato(texto){
  }
  function BorrrarSeccion(){
      sessionStorage.clear();
-     location.href  ="http://localhost:8090/SAT-PRACO-spring/login";
+     location.href  ="http://localhost:8080/SAT-PRACO-spring/login";
  }
  function ListaUserParaAdmin(){
      
@@ -404,22 +412,84 @@ function formato(texto){
         });
     }
     function listaTareasParaReporte(){
-        var idusu = 1;
-        var fecha = "2018-11-25T00:00:00";
+        var d = new Date();
+        var month = d.getMonth()+1;
+        var day = d.getDate();
+        var year = d.getFullYear();
+        var hora = d.getHours();
+        var minutos = d.getMinutes();
+        var segundos = d.getSeconds();
+        if(minutos<10){
+            minutos ="0"+minutos;
+        }
+         if(segundos<10){
+            segundos ="0"+segundos;
+        }
+        var fechar = year+"-"+month+"-"+day+"T"+hora+":"+minutos+":"+segundos;
+        var tareasincun = 0;
+        var tareascumplidas = 0;
+        var horas =0;
+        var promedio = 0;
+        var idusu = $("#lstempleados").val();
+        var fecha = $("#fechadesde").val();
           $.ajax({
         type: "post",
-        url: "/SAT-PRACO-spring/listaTareasPorUser",
+        url: "/SAT-PRACO-spring/listaTareasParaReporte",
         contentType: "application/json",
         data:JSON.stringify( {
             idUser :idusu,
-            Fechatarea:fecha
+            Fechatarea:fecha+":00"
             }),
           success: function(data){
               console.log("data",data);
+              for(i=0;i<data.length;i++){
+                  $("#tareas").append("<tr><td>"+data[i].observacion+"</td><td>"+data[i].fechatarea+"</td><td>"+data[i].horaInicioE+"</td><td>"+data[i].horaInicio+"</td><td>"+data[i].horaTermino+"</td></tr>");
+                  
+                  if(data[i].horaInicio === null){
+                      tareasincun = tareasincun+ 1;
+                  }
+                  if(data[i].horaTermino !== null){
+                      tareascumplidas = tareascumplidas +1;
+                  }
+                   
+                   if(data[i].horaInicio !== null && data[i].horaTermino !== null){
+                       var fecha1 = moment(data[i].horaInicio);
+                       var fecha2 = moment(data[i].horaTermino);
+                       horas  = horas + fecha2.diff(fecha1, 'hours');
+                   }
+                    
+              }
+              promedio = horas/data.length;
+              RegistraReporte(idusu,tareascumplidas,tareasincun,promedio,fechar);
+              $("#resumen").text("tareas incumplidas : "+tareasincun+" tareas cumplidas : "+tareascumplidas+" promedio de horas : "+promedio);
+                  
+             
+    
           },error:function(){
-              alert("no funca");
+              alert("no funca 2");
           }
         });
         
     }
+    function RegistraReporte(idus,tc,ti,pt,fecha){
+           $.ajax({
+        type: "post",
+        url: "/SAT-PRACO-spring/RegistraReporte",
+        contentType: "application/json",
+        data:JSON.stringify( {
+            idUsu :idus,
+            tareasCumplidas:tc,
+            tareasIncumplidas:ti,
+            promedioTiempo:pt,
+            fechaReporte:fecha
+            }),
+          success: function(data){
+              console.log("data",data);
+          },error:function(){
+              alert("no funca 2");
+          }
+        });
+        
+    }
+
  

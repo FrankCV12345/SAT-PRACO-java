@@ -10,7 +10,7 @@
         <script src="${scripts}" type="text/javascript"></script>
         <link href="${estilos}" rel="stylesheet" />      
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  
+   <script src="http://momentjs.com/downloads/moment.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
         <spring:url var="JqueryJs" value="/Recursos/Scripts/Jquery/jquery-1.12.4.js"></spring:url>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -143,6 +143,7 @@
                         </form>
                     </div>
                     <!--REGISTRO DE TAREA-->
+                    
                     <div class="frm-registra-tarea">
                         <form id="frm-registra-tarea">
                                     <div class="form-group">
@@ -167,6 +168,49 @@
                                   </div>
                             <input type="button" name="" value="GUARDAR" onclick="RegistranNewTarea()">
                             <input type="button" name="" value="X" onclick="MostrarModal('frm-registra-tarea')">
+                        </form>
+                    </div>
+                      <!--REGISTRO DE REPORTE-->
+                    
+                    <div class="frm-registra-reporte">
+                        <form id="frm-regis-reporte">
+                                    <div class="form-group">
+                                           <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                  <label class="input-group-text" for="">ENPLEADO</label>
+                                                </div>
+                                                <select class="custom-select" id="lstempleados">
+                                                  <option selected>selecione</option>
+                                                
+                                                </select>
+                                               <br>
+                                               <div class="input-group mb-3">
+                                                  <label for="example-datetime-local-input" class="col-2 col-form-label">DESDE</label>
+                                          <div class="col-10">
+                                            <input class="form-control" type="datetime-local"  id="fechadesde">
+                                          </div>
+                                            </div>
+                                               
+                                           </div>
+                                        <div class="lstareasReporte">
+                                            <table id="tareas">
+                                                <thead>
+                                                   <tr>
+                                                        <th>OBSERVACION</th>
+                                                        <th>FECHA</th>
+                                                        <th>HORA DE INCIO E</th>
+                                                        <th>HORA DE INCIO REAL</th>
+                                                        <th>HORA DE  FIN</th>
+                                                    </tr>
+                                                </thead>
+                                                
+                                            </table>
+                                            <div id="resumen"></div>
+                                        </div>
+                                          
+                                  </div>
+                             <input type="button" name="" value="ver/guardar reporte" onclick="listaTareasParaReporte()">
+                            <input type="button" name="" value="X" onclick="MostrarModal('frm-registra-reporte')">
                         </form>
                     </div>
                       <!-- INICIO DE EL ELEMENTO DIV CALCULA  SUELDO-->
