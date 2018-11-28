@@ -1,4 +1,5 @@
 var puestos =[];
+var  bandera = false;
 function MostrarHora(){
     var hora = new Date();
     var meridiano = "AM";
@@ -257,11 +258,11 @@ function formato(texto){
               }else{
                   sessionStorage.setItem("datosUser",JSON.stringify(data));
                   if(data.id_cargo === 1){
-                      location.href  ="http://localhost:8080/SAT-PRACO-spring/empleado";
+                      location.href  ="http://localhost:8090/SAT-PRACO-spring/empleado";
                   }else if(data.id_cargo === 3){
-                      location.href  ="http://localhost:8080/SAT-PRACO-spring/admin";
+                      location.href  ="http://localhost:8090/SAT-PRACO-spring/admin";
                   }else if(data.id_cargo === 2){
-                      location.href  ="http://localhost:8080/SAT-PRACO-spring/Supervisor";
+                      location.href  ="http://localhost:8090/SAT-PRACO-spring/Supervisor";
                   }else{
                       alert("algo salio mal");
                   }
@@ -286,7 +287,7 @@ function formato(texto){
      
      
      if(sessionStorage.getItem("datosUser") === null){
-        location.href  ="http://localhost:8080/SAT-PRACO-spring/login";
+        location.href  ="http://localhost:8090/SAT-PRACO-spring/login";
      }else{
           var datos = sessionStorage.getItem("datosUser");
          if(JSON.parse(datos).id_cargo === validador){
@@ -299,7 +300,7 @@ function formato(texto){
         ListaUserParaAdmin();
          }else{
              alert("USted no tiene atuotizacion para esta aqui");
-             location.href  ="http://localhost:8080/SAT-PRACO-spring/login";
+             location.href  ="http://localhost:8090/SAT-PRACO-spring/login";
              sessionStorage.clear();
          }
          
@@ -309,7 +310,7 @@ function formato(texto){
  }
  function BorrrarSeccion(){
      sessionStorage.clear();
-     location.href  ="http://localhost:8080/SAT-PRACO-spring/login";
+     location.href  ="http://localhost:8090/SAT-PRACO-spring/login";
  }
  function ListaUserParaAdmin(){
      
@@ -348,6 +349,9 @@ function formato(texto){
  
  
  function IniciarTerminar(elemnto){
+      var estado = elemnto.getAttribute("data-estado");
+      if(estado === "0"){
+          elemnto.style.color ="red";
         var d = new Date();
         var month = d.getMonth()+1;
         var day = d.getDate();
@@ -377,10 +381,17 @@ function formato(texto){
               alert("no funca");
           }
         });
+          elemnto.setAttribute("data-estado","1");
+      }else if(estado === "1"){
+           elemnto.style.color ="green";
+          TerminarTarea(elemnto);
+          
+      }
+      
     
  }
  
- function TerminarTarea(elemnto){
+ function TerminarTarea(elem){
         var d = new Date();
         var month = d.getMonth()+1;
         var day = d.getDate();
@@ -395,7 +406,7 @@ function formato(texto){
             segundos ="0"+segundos;
         }
         var fecha = year+"-"+month+"-"+day+"T"+hora+":"+minutos+":"+segundos;
-        var ele = elemnto.getAttribute("data-id");
+        var ele = elem.getAttribute("data-id");
           $.ajax({
         type: "post",
         url: "/SAT-PRACO-spring/registraFinTarea",

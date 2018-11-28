@@ -315,8 +315,7 @@ go
 select * from Usuario
 go
 --======= inserto ingreso ===============
-insert  into RegistroIngreso values(SYSDATETIME (), 1)
-go
+
 
 
 create  PROCEDURE Proc_reg_entrada
@@ -337,13 +336,7 @@ create procedure Proc_busca_usu
  select Usuario.IdUsuario from Usuario where Usuario.IdUsuario =  @id_usu
 go
 
-select * from RegistroIngreso
-go
-select * from Usuario
-go
 
-Proc_verRI 2
-go
 
 create procedure proc_fechaingreso
 @id_usu int
@@ -369,8 +362,7 @@ create procedure proc_list_cargo
 as
 select * from cargo
 go
-proc_list_cargo
-go
+
 create procedure proc_registra_user
 @nombres varchar(30),
 @apellidos varchar(50),
@@ -457,8 +449,7 @@ create procedure Proc_Login
  select IdUsuario,Nombre,Apellido,IdCargo from Usuario where Usuario.IdUsuario =  @id_usu
 go
 
-proc_listTareasPorUser 2
-go
+
 create procedure insertaTareas
 @descrip varchar(100),
 @horas int,
@@ -480,10 +471,6 @@ updateTarea 3,'ENTREGAR PEDIDOO',3,'1'
 go
 
 
-proc_alteraHoraInicio '2018-11-19T12:08:36',30
- go
- proc_alteraHoraTermino '2018-11-25T21:08:20',30
- go
 create procedure procListaTareasParaRerporte
 @id_usu int,
 @fecha datetime
@@ -499,12 +486,12 @@ create procedure procRegistraReporte
 as
  insert into Reporte values(@fecha,@id_user,@tareasCum,@tareasIncum,@promedioTiempo)
  go
- 
-procListaTareasParaRerporte 1 ,'2018-11-25T00:00:00'
-go
-procListaTareasParaRerporte 1,'2018-11-25T00:00:00'
-go
+
 select * from usuario
 go
-update usuario set IdCargo = 2 where IdUsuario =3
+update usuario set IdCargo = 3 where IdUsuario =3
+go
+Proc_Login 1
+go
+select  * from TareaUser
 go
